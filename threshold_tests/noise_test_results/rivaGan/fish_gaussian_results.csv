@@ -1,0 +1,9 @@
+"std_dev","decoded","success"
+0,"qing",True
+5,"qing",True
+10,"qing",True
+15,"qing",True
+20,"q)ng",False
+25,"qing",True
+30,"[UTF-8 Error] UnicodeDeco",False
+35,"[UTF-8 Error] UnicodeDeco",False
