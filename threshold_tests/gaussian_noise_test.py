@@ -18,7 +18,8 @@ def test_gaussian_noise_threshold(
     method: str = "dwtDct",
     output_dir: str = "threshold_tests/noise_test_results",
     watermark: str = "qingquan",
-    noise_std_range: list[float] = None
+    noise_std_range: list[float] = None,
+    early_stop_failures: int = 2
 ):
     if noise_std_range is None:
         noise_std_range = list(range(0, 51, 5))  # e.g., [0, 5, 10, ..., 50]
@@ -52,6 +53,8 @@ def test_gaussian_noise_threshold(
         print(f"{'Std Dev':>8} | {'Decoded':<25} | Success")
         print("-" * 50)
 
+        failure_streak = 0
+
         for std in noise_std_range:
             attacked = gaussian_noise_attack(watermarked, std=std)
             out_name = f"gaussian_std{std}.jpg"
@@ -62,6 +65,14 @@ def test_gaussian_noise_threshold(
             print(f"{std:8} | {decoded[:25]:<25} | {status}")
 
             writer.writerow([std, decoded[:25], success])
+
+            if not success:
+                failure_streak += 1
+                if failure_streak >= early_stop_failures:
+                    print(f"Stopping early after {failure_streak} consecutive failures at std={std}")
+                    break
+            else:
+                failure_streak = 0
 
 def batch_test_gaussian_noise(
     image_root: str = "unsplash_test_set",
@@ -83,4 +94,5 @@ def batch_test_gaussian_noise(
                     )
 
 # Example usage:
-batch_test_gaussian_noise()
+batch_test_gaussian_noise(methods=["dwtDct"])
+
