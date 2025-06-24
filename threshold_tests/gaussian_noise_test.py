@@ -46,7 +46,7 @@ def test_gaussian_noise_threshold(
 
     csv_path = os.path.join(method_dir, f"{base_name}_gaussian_results.csv")
     with open(csv_path, mode="w", newline="") as f:
-        writer = csv.writer(f)
+        writer = csv.writer(f, escapechar='\\', quoting=csv.QUOTE_NONNUMERIC)
         writer.writerow(["std_dev", "decoded", "success"])
 
         print(f"\nTesting Gaussian noise robustness on {base_name} using {method}...")
@@ -62,9 +62,10 @@ def test_gaussian_noise_threshold(
 
             decoded, success = safe_decode_fn(attacked, watermark, method)
             status = "✅" if success else "❌"
-            print(f"{std:8} | {decoded[:25]:<25} | {status}")
+            safe_decoded = decoded[:25].encode("utf-8", "replace").decode("utf-8")
+            print(f"{std:8} | {safe_decoded:<25} | {status}")
 
-            writer.writerow([std, decoded[:25], success])
+            writer.writerow([std, safe_decoded, success])
 
             if not success:
                 failure_streak += 1
@@ -94,5 +95,5 @@ def batch_test_gaussian_noise(
                     )
 
 # Example usage:
-batch_test_gaussian_noise(methods=["dwtDct"])
+batch_test_gaussian_noise(methods=["rivaGan"])
 

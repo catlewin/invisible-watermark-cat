@@ -20,6 +20,7 @@ setuptools.setup(
       'Pillow>=6.0.0',
       'PyWavelets>=1.1.1',
       'numpy>=1.17.0'
+      'onnxruntime'
   ],
   scripts=['invisible-watermark'],
   classifiers=[
