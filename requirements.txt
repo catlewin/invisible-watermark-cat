@@ -34,3 +34,7 @@ torch==2.7.1
 triton==3.3.1
 typing_extensions==4.14.0
 onnxruntime==1.22.0
+
+setuptools~=59.6.0
+pandas~=2.3.0
+matplotlib~=3.10.3
