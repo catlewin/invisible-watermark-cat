@@ -1,0 +1,4 @@
+method,image_count,failure_count,average_threshold,median_threshold,std_dev_threshold,min_threshold,max_threshold
+dwtDct,15,11,3.75,2.5,4.15,0,10
+dwtDctSvd,15,0,12.67,15.0,2.49,10,15
+rivaGan,15,1,19.64,20.0,8.55,5,35

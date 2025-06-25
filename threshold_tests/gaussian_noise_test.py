@@ -1,12 +1,9 @@
 import os
 import cv2
-import numpy as np
 import csv
 from watermark_utils import (
     embed_watermark_64bit,
-    decode_watermark_64bit,
     embed_watermark_32bit,
-    decode_watermark_32bit,
     safe_decode_watermark,
     safe_decode_watermark_32bit,
     gaussian_noise_attack
