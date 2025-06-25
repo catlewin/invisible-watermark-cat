@@ -1,0 +1,2 @@
+method,image_count,failure_count,average_threshold,median_threshold,std_dev_threshold,min_threshold,max_threshold
+dwtDct,15,3,9.0,10.0,6.38,0,20

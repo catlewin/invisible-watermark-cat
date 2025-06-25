@@ -76,9 +76,9 @@ def test_gaussian_noise_threshold(
                 failure_streak = 0
 
 def batch_test_gaussian_noise(
-    image_root: str = "unsplash_test_set_resized",
+    image_root: str = "unsplash_test_set",
     methods: list[str] = ["dwtDct", "dwtDctSvd", "rivaGan"],
-    output_dir: str = "threshold_tests/noise_test_results",
+    output_dir: str = "dwtDct_og_img",
     watermark: str = "qingquan"
 ):
     for root, _, files in os.walk(image_root):
@@ -95,5 +95,5 @@ def batch_test_gaussian_noise(
                     )
 
 # Example usage:
-batch_test_gaussian_noise(methods=["dwtDctSvd"])
+batch_test_gaussian_noise(methods=["dwtDct"])
 
