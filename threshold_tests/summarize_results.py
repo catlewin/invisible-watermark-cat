@@ -364,7 +364,7 @@ def summarize_increase_brightness_threshold(
     methods: List[str],
     colors: Dict[str, str]
 ):
-    bin_centers = [round(x, 2) for x in np.arange(1.0, 2.05, 0.2)]  # Brightness 1.0–2.0
+    bin_centers = [round(x, 2) for x in np.arange(1.0, 3.05, 0.2)]  # Brightness 1.0–2.0
     summarize_all_threshold_results(
         results_root=results_root,
         attack_name="brightness",
@@ -380,6 +380,7 @@ def summarize_increase_brightness_threshold(
 
 
 if __name__ == "__main__":
+
     summarize_noise_threshold(
         results_root="threshold_tests/noise_test_results",
         metric="std_dev",
@@ -406,6 +407,7 @@ if __name__ == "__main__":
         methods=["dwtDct", "dwtDctSvd", "rivaGan"],
         colors={"dwtDct": "skyblue", "dwtDctSvd": "lightgreen", "rivaGan": "salmon"},
     )
+    
 
     summarize_increase_brightness_threshold(
         results_root="threshold_tests/increase_brightness_test_results",

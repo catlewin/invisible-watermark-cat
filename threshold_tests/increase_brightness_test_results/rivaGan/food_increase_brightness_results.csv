@@ -1,8 +1,13 @@
 "brightness_factor","decoded","success","attack_type","can_decode_clean","first_failure","last_success"
 "clean","qing",True,"clean",True,"",""
-1.0,"qing",True,"brightness_increase",True,"",1.0
-1.2,"sing",False,"brightness_increase",True,1.2,1.0
-1.4,"3ing",False,"brightness_increase",True,1.2,1.0
-1.6,"3in'",False,"brightness_increase",True,1.2,1.0
-1.8,"3yn'",False,"brightness_increase",True,1.2,1.0
-2.0,"3x.'",False,"brightness_increase",True,1.2,1.0
+1.0,"qing",True,"brightness",True,"",1.0
+1.2,"sing",False,"brightness",True,1.2,1.0
+1.4,"3ing",False,"brightness",True,1.2,1.0
+1.6,"3in'",False,"brightness",True,1.2,1.0
+1.8,"3yn'",False,"brightness",True,1.2,1.0
+2.0,"3x.'",False,"brightness",True,1.2,1.0
+2.2,"3`.?",False,"brightness",True,1.2,1.0
+2.4,"3p,=",False,"brightness",True,1.2,1.0
+2.6,"[UTF-8 Error] UnicodeDeco",False,"brightness",True,1.2,1.0
+2.8,"[UTF-8 Error] UnicodeDeco",False,"brightness",True,1.2,1.0
+3.0,"[UTF-8 Error] UnicodeDeco",False,"brightness",True,1.2,1.0
