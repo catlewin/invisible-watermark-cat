@@ -1,3 +1,13 @@
-"std_dev","decoded","success"
-0,"qingsuan",False
-5,"[UTF-8 Error] UnicodeDeco",False
+"std_dev","decoded","success","attack_type","can_decode_clean","first_failure","last_success"
+"clean","qingsuan",False,"clean",False,"",""
+0,"qingsuan",False,"noise",False,0,""
+5,"[UTF-8 Error] UnicodeDeco",False,"noise",False,0,""
+10,"[UTF-8 Error] UnicodeDeco",False,"noise",False,0,""
+15,"[UTF-8 Error] UnicodeDeco",False,"noise",False,0,""
+20,"[UTF-8 Error] UnicodeDeco",False,"noise",False,0,""
+25,"[UTF-8 Error] UnicodeDeco",False,"noise",False,0,""
+30,"[UTF-8 Error] UnicodeDeco",False,"noise",False,0,""
+35,"[UTF-8 Error] UnicodeDeco",False,"noise",False,0,""
+40,"[UTF-8 Error] UnicodeDeco",False,"noise",False,0,""
+45,"[UTF-8 Error] UnicodeDeco",False,"noise",False,0,""
+50,"[UTF-8 Error] UnicodeDeco",False,"noise",False,0,""

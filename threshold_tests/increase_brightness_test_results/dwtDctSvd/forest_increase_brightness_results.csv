@@ -1,0 +1,8 @@
+"brightness_factor","decoded","success","attack_type","can_decode_clean","first_failure","last_success"
+"clean","qingquan",True,"clean",True,"",""
+1.0,"qingquan",True,"brightness_increase",True,"",1.0
+1.2,"qingquan",True,"brightness_increase",True,"",1.2
+1.4,"[UTF-8 Error] UnicodeDeco",False,"brightness_increase",True,1.4,1.2
+1.6,"[UTF-8 Error] UnicodeDeco",False,"brightness_increase",True,1.4,1.2
+1.8,"[UTF-8 Error] UnicodeDeco",False,"brightness_increase",True,1.4,1.2
+2.0,"[UTF-8 Error] UnicodeDeco",False,"brightness_increase",True,1.4,1.2

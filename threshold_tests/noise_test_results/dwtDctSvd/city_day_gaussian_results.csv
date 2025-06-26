@@ -1,7 +1,13 @@
-"std_dev","decoded","success"
-0,"qingquan",True
-5,"qingquan",True
-10,"qingquan",True
-15,"qingquan",True
-20,"qinwqean",False
-25,"i-Ooqma",False
+"std_dev","decoded","success","attack_type","can_decode_clean","first_failure","last_success"
+"clean","qingquan",True,"clean",True,"",""
+0,"qingquan",True,"noise",True,"",0
+5,"qingquan",True,"noise",True,"",5
+10,"qingquan",True,"noise",True,"",10
+15,"qingquan",True,"noise",True,"",15
+20,"qmngqEan",False,"noise",True,20,15
+25,"[UTF-8 Error] UnicodeDeco",False,"noise",True,20,15
+30,"[UTF-8 Error] UnicodeDeco",False,"noise",True,20,15
+35,"[UTF-8 Error] UnicodeDeco",False,"noise",True,20,15
+40,"[UTF-8 Error] UnicodeDeco",False,"noise",True,20,15
+45,"[UTF-8 Error] UnicodeDeco",False,"noise",True,20,15
+50,"[UTF-8 Error] UnicodeDeco",False,"noise",True,20,15

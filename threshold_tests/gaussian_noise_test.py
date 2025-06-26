@@ -15,11 +15,10 @@ def test_gaussian_noise_threshold(
     method: str = "dwtDct",
     output_dir: str = "threshold_tests/noise_test_results",
     watermark: str = "qingquan",
-    noise_std_range: list[float] = None,
-    early_stop_failures: int = 2
+    noise_std_range: list[float] = None
 ):
     if noise_std_range is None:
-        noise_std_range = list(range(0, 51, 5))  # e.g., [0, 5, 10, ..., 50]
+        noise_std_range = list(range(0, 51, 5))  # [0, 5, ..., 50]
 
     img = cv2.imread(image_path)
     assert img is not None, f"Failed to load image: {image_path}"
@@ -32,25 +31,37 @@ def test_gaussian_noise_threshold(
         watermarked = embed_watermark_64bit(img, watermark, method)
         safe_decode_fn = safe_decode_watermark
 
-    # Extract base name and build output paths
+    # Output paths
     base_name = os.path.splitext(os.path.basename(image_path))[0]
     method_dir = os.path.join(output_dir, method)
     image_dir = os.path.join(method_dir, base_name)
     os.makedirs(image_dir, exist_ok=True)
-
-    # Save watermarked original
     cv2.imwrite(os.path.join(image_dir, "original_watermarked.jpg"), watermarked)
 
+    # CSV setup
     csv_path = os.path.join(method_dir, f"{base_name}_gaussian_results.csv")
     with open(csv_path, mode="w", newline="") as f:
         writer = csv.writer(f, escapechar='\\', quoting=csv.QUOTE_NONNUMERIC)
-        writer.writerow(["std_dev", "decoded", "success"])
+        writer.writerow([
+            "std_dev", "decoded", "success", "attack_type", "can_decode_clean",
+            "first_failure", "last_success"
+        ])
 
         print(f"\nTesting Gaussian noise robustness on {base_name} using {method}...")
         print(f"{'Std Dev':>8} | {'Decoded':<25} | Success")
-        print("-" * 50)
+        print("-" * 60)
 
-        failure_streak = 0
+        # Clean decode (no attack)
+        decoded_clean, success_clean = safe_decode_fn(watermarked, watermark, method)
+        safe_decoded_clean = decoded_clean[:25].encode("utf-8", "replace").decode("utf-8")
+        print(f"{'clean':>8} | {safe_decoded_clean:<25} | {'✅' if success_clean else '❌'}")
+        writer.writerow([
+            "clean", safe_decoded_clean, success_clean, "clean", success_clean, "", ""
+        ])
+
+        # Track thresholds
+        first_failure = None
+        last_success = None
 
         for std in noise_std_range:
             attacked = gaussian_noise_attack(watermarked, std=std)
@@ -62,20 +73,22 @@ def test_gaussian_noise_threshold(
             safe_decoded = decoded[:25].encode("utf-8", "replace").decode("utf-8")
             print(f"{std:8} | {safe_decoded:<25} | {status}")
 
-            writer.writerow([std, safe_decoded, success])
+            if success:
+                last_success = std
+            elif first_failure is None:
+                first_failure = std
 
-            if not success:
-                failure_streak += 1
-                if failure_streak >= early_stop_failures:
-                    print(f"Stopping early after {failure_streak} consecutive failures at std={std}")
-                    break
-            else:
-                failure_streak = 0
+            writer.writerow([
+                std, safe_decoded, success, "noise", success_clean,
+                first_failure if first_failure is not None else "",
+                last_success if last_success is not None else ""
+            ])
+
 
 def batch_test_gaussian_noise(
-    image_root: str = "unsplash_test_set",
+    image_root: str = "unsplash_test_set_resized",
     methods: list[str] = ["dwtDct", "dwtDctSvd", "rivaGan"],
-    output_dir: str = "dwtDct_og_img",
+    output_dir: str = "threshold_tests/noise_test_results",
     watermark: str = "qingquan"
 ):
     for root, _, files in os.walk(image_root):
@@ -92,5 +105,5 @@ def batch_test_gaussian_noise(
                     )
 
 # Example usage:
-batch_test_gaussian_noise(methods=["dwtDct"])
+batch_test_gaussian_noise(methods=["dwtDct", "dwtDctSvd", "rivaGan"])
 
