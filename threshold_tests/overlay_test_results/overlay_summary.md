@@ -1,5 +1,7 @@
 # 📊 Overlay Threshold Summary
 
+> 📘 **Overlay thresholds represent the highest opacity (alpha) of a logo overlaid on the image where watermark decoding still succeeded. Higher values reflect better resistance to visual obstructions.**
+
 This summary reports the robustness of each watermarking method under threshold-based attacks.
 - **Clean Failures**: Number of images where the method failed to decode the original, unattacked watermarked image. These images are excluded from threshold calculations.
 - **Attack Failures**: Number of images that failed decoding at all tested attack levels.

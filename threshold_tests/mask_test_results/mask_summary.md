@@ -1,5 +1,7 @@
 # 📊 Mask Threshold Summary
 
+> 📘 **Mask thresholds represent the largest proportion of the image that could be obscured with a mask while still allowing successful decoding. Higher values indicate stronger robustness.**
+
 This summary reports the robustness of each watermarking method under threshold-based attacks.
 - **Clean Failures**: Number of images where the method failed to decode the original, unattacked watermarked image. These images are excluded from threshold calculations.
 - **Attack Failures**: Number of images that failed decoding at all tested attack levels.

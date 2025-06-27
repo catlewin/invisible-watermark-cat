@@ -1,5 +1,7 @@
 # 📊 Brightness Threshold Summary
 
+> 📘 **Brightness thresholds indicate the highest brightness factor (1.0–2.0) where watermark decoding remained successful. Higher values show better robustness to brightening.**
+
 This summary reports the robustness of each watermarking method under threshold-based attacks.
 - **Clean Failures**: Number of images where the method failed to decode the original, unattacked watermarked image. These images are excluded from threshold calculations.
 - **Attack Failures**: Number of images that failed decoding at all tested attack levels.

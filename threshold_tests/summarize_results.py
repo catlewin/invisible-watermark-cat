@@ -94,14 +94,6 @@ def generate_individual_distributions(
 
         valid_thresholds = [float(t) for t in thresholds if t is not None and not pd.isnull(t)]
 
-        '''debugging
-        print(f"Method: {method}")
-        print(f"Valid thresholds: {valid_thresholds}")
-        print(f"Bin centers: {x_vals}")
-        print(f"Threshold: {thresholds}")
-         print(f"{method}: {len(valid_thresholds)} valid thresholds\n\n")
-        '''
-
         counts = [sum(np.isclose(t, x, atol=bin_width / 2) for t in valid_thresholds) for x in x_vals]
 
         plt.figure(figsize=(8, 5))
@@ -192,12 +184,18 @@ def plot_combined_distribution(
     print(f"Combined plot saved to {output_path}")
 
 
-def write_markdown_summary(df, output_dir, attack_name, methods, thresholds_by_method=None):
+def write_markdown_summary(df, output_dir, attack_name,
+                           methods, thresholds_by_method=None,
+                           blurb: str = None):
     os.makedirs(output_dir, exist_ok=True)
     md_path = os.path.join(output_dir, f"{attack_name}_summary.md")
 
     with open(md_path, "w") as f:
         f.write(f"# 📊 {attack_name.title()} Threshold Summary\n\n")
+
+        if blurb:
+            f.write(f"> 📘 {blurb}\n\n")
+
         f.write("This summary reports the robustness of each watermarking method under threshold-based attacks.\n")
         f.write("- **Clean Failures**: Number of images where the method failed to decode the original, "
                 "unattacked watermarked image. These images are excluded from threshold calculations.\n")
@@ -264,7 +262,8 @@ def summarize_all_threshold_results(
     colors: Dict[str, str],
     threshold_mode: str = "last_success",
     bin_centers: List[float] = None,
-    bin_width: float = 1.0
+    bin_width: float = 1.0,
+    blurb: str = None
 ):
     thresholds_by_method, clean_failures = load_thresholds_by_method(results_root, methods, metric, threshold_mode=threshold_mode)
     df = summarize_thresholds(thresholds_by_method, clean_failures)
@@ -289,7 +288,7 @@ def summarize_all_threshold_results(
         bin_width=bin_width
     )
 
-    write_markdown_summary(df, results_root, attack_name, methods, thresholds_by_method)
+    write_markdown_summary(df, results_root, attack_name, methods, thresholds_by_method, blurb)
     print(df)
 
 
@@ -300,7 +299,7 @@ def summarize_noise_threshold(
     methods: List[str],
     colors: Dict[str, str],
     bin_centers: List[float],
-    bin_width: float = 1.0
+    bin_width: float = 1.0,
 ):
     bin_centers = list(range(0, 45, 5))
     summarize_all_threshold_results(
@@ -312,7 +311,9 @@ def summarize_noise_threshold(
         colors=colors,
         threshold_mode="max",
         bin_centers=bin_centers,
-        bin_width=5
+        bin_width=5,
+        blurb = "**Gaussian noise thresholds represent the highest standard deviation (σ) of noise that the watermark"
+                " could withstand before failing to decode.**"
     )
 
 
@@ -333,7 +334,9 @@ def summarize_jpeg_threshold(
         colors=colors,
         threshold_mode="min",  # lowest quality (i.e., most compression) that still passes
         bin_centers=bin_centers,
-        bin_width=5
+        bin_width=5,
+        blurb = "**JPEG compression thresholds represent the lowest JPEG quality setting where the watermark"
+                " could still be successfully decoded. Lower values indicate greater robustness.**"
     )
 
 def summarize_decrease_brightness_threshold(
@@ -353,7 +356,9 @@ def summarize_decrease_brightness_threshold(
         colors=colors,
         threshold_mode="min",
         bin_centers=bin_centers,
-        bin_width=0.2
+        bin_width=0.2,
+        blurb = "**Brightness Decrease thresholds indicate the lowest brightness factor (0.0–1.0) where watermark "
+                "decoding remained successful. Lower values show better robustness to dimming.**"
     )
 
 
@@ -374,7 +379,9 @@ def summarize_increase_brightness_threshold(
         colors=colors,
         threshold_mode="max",  # highest brightness before failure
         bin_centers=bin_centers,
-        bin_width=0.2
+        bin_width=0.2,
+        blurb = "**Brightness Increase thresholds indicate the highest brightness factor (1.0–2.0) where watermark "
+                "decoding remained successful. Higher values show better robustness to brightening.**"
     )
 
 def summarize_crop_threshold(
@@ -394,7 +401,9 @@ def summarize_crop_threshold(
         colors=colors,
         threshold_mode="min",  # smallest crop ratio that still works
         bin_centers=bin_centers,
-        bin_width=0.1
+        bin_width=0.1,
+        blurb = ("**Crop thresholds represent the smallest percentage of the image that could be retained (centered)"
+                 " while still allowing successful decoding. Lower values indicate greater robustness to cropping.**")
     )
 
 def summarize_mask_threshold(
@@ -414,7 +423,9 @@ def summarize_mask_threshold(
         colors=colors,
         threshold_mode="max",  # lowest masking level that still succeeds
         bin_centers=bin_centers,
-        bin_width=0.05
+        bin_width=0.05,
+        blurb = "**Mask thresholds represent the largest proportion of the image that could be "
+                "obscured with a mask while still allowing successful decoding. Higher values indicate stronger robustness.**"
     )
 
 def summarize_overlay_threshold(
@@ -434,7 +445,9 @@ def summarize_overlay_threshold(
         colors=colors,
         threshold_mode="max",  # Higher overlay strength = more attack, so max successful is most robust
         bin_centers=bin_centers,
-        bin_width=0.1
+        bin_width=0.1,
+        blurb = "**Overlay thresholds represent the highest opacity (alpha) of a logo overlaid on the "
+                "image where watermark decoding still succeeded. Higher values reflect better resistance to visual obstructions.**"
     )
 
 def summarize_resize_threshold(
@@ -456,7 +469,9 @@ def summarize_resize_threshold(
         colors=colors,
         threshold_mode="min",  # we're finding the lowest scale factor that still works
         bin_centers=bin_centers,
-        bin_width=0.1
+        bin_width=0.1,
+        blurb = "**Resize thresholds indicate the smallest scaling factor (as a fraction of original size) "
+                "where watermark decoding still succeeded. Lower values reflect better robustness to downscaling.**"
     )
 
 def summarize_rotate_threshold(
@@ -464,7 +479,7 @@ def summarize_rotate_threshold(
     metric: str,
     metric_label: str,
     methods: List[str],
-    colors: Dict[str, str]
+    colors: Dict[str, str],
 ):
     bin_centers = list(range(0, 20, 2))  # Rotation angles: 0–18 degrees
     summarize_all_threshold_results(
@@ -476,11 +491,13 @@ def summarize_rotate_threshold(
         colors=colors,
         threshold_mode="max",  # max rotation angle the watermark can survive
         bin_centers=bin_centers,
-        bin_width=2
+        bin_width=2,
+        blurb="**Rotation thresholds reflect the maximum degree of rotation where watermark decoding was still successful.**"
     )
 
 
 if __name__ == "__main__":
+    '''
     '''
     summarize_noise_threshold(
         results_root="threshold_tests/noise_test_results",
@@ -500,24 +517,21 @@ if __name__ == "__main__":
         colors={"dwtDct": "skyblue", "dwtDctSvd": "lightgreen", "rivaGan": "salmon"},
     )
 
-
     summarize_decrease_brightness_threshold(
         results_root="threshold_tests/decrease_brightness_test_results",
         metric="brightness_factor",
-        metric_label="Brightness",
+        metric_label="Brightness Decrease",
         methods=["dwtDct", "dwtDctSvd", "rivaGan"],
         colors={"dwtDct": "skyblue", "dwtDctSvd": "lightgreen", "rivaGan": "salmon"},
     )
-    
 
     summarize_increase_brightness_threshold(
         results_root="threshold_tests/increase_brightness_test_results",
         metric="brightness_factor",
-        metric_label="Brightness",
+        metric_label="Brightness Increase",
         methods=["dwtDct", "dwtDctSvd", "rivaGan"],
         colors={"dwtDct": "skyblue", "dwtDctSvd": "lightgreen", "rivaGan": "salmon"},
     )
-    
 
     summarize_crop_threshold(
         results_root="threshold_tests/crop_test_results",
@@ -534,7 +548,6 @@ if __name__ == "__main__":
         methods=["dwtDct", "dwtDctSvd", "rivaGan"],
         colors={"dwtDct": "skyblue","dwtDctSvd": "lightgreen","rivaGan": "salmon"}
     )
-    
 
     summarize_overlay_threshold(
         results_root="threshold_tests/overlay_test_results",
@@ -551,7 +564,6 @@ if __name__ == "__main__":
         methods=["dwtDct", "dwtDctSvd", "rivaGan"],
         colors={"dwtDct": "skyblue", "dwtDctSvd": "lightgreen", "rivaGan": "salmon"},
     )
-    '''
 
     summarize_rotate_threshold(
         results_root="threshold_tests/rotate_test_results",
@@ -564,5 +576,3 @@ if __name__ == "__main__":
             "rivaGan": "salmon"
         }
     )
-
-

@@ -1,5 +1,7 @@
 # 📊 Jpeg Threshold Summary
 
+> 📘 **JPEG compression thresholds represent the lowest JPEG quality setting where the watermark could still be successfully decoded. Lower values indicate greater robustness.**
+
 This summary reports the robustness of each watermarking method under threshold-based attacks.
 - **Clean Failures**: Number of images where the method failed to decode the original, unattacked watermarked image. These images are excluded from threshold calculations.
 - **Attack Failures**: Number of images that failed decoding at all tested attack levels.

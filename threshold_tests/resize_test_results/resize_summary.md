@@ -1,5 +1,7 @@
 # 📊 Resize Threshold Summary
 
+> 📘 **Resize thresholds indicate the smallest scaling factor (as a fraction of original size) where watermark decoding still succeeded. Lower values reflect better robustness to downscaling.**
+
 This summary reports the robustness of each watermarking method under threshold-based attacks.
 - **Clean Failures**: Number of images where the method failed to decode the original, unattacked watermarked image. These images are excluded from threshold calculations.
 - **Attack Failures**: Number of images that failed decoding at all tested attack levels.
