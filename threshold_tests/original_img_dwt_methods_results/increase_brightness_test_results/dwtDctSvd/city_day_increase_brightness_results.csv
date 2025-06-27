@@ -1,0 +1,8 @@
+"brightness_factor","decoded","success","attack_type","can_decode_clean","first_failure","last_success"
+"clean","qingquan",True,"clean",True,"",""
+1.0,"qingquan",True,"brightness",True,"",1.0
+1.2,"qingquan",True,"brightness",True,"",1.2
+1.4,"qingquan",True,"brightness",True,"",1.4
+1.6,"pingqqan",False,"brightness",True,1.6,1.4
+1.8,"qingquan",True,"brightness",True,1.6,1.8
+2.0,"qingquan",True,"brightness",True,1.6,2.0
