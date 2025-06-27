@@ -377,10 +377,111 @@ def summarize_increase_brightness_threshold(
         bin_width=0.2
     )
 
+def summarize_crop_threshold(
+    results_root: str,
+    metric: str,
+    metric_label: str,
+    methods: List[str],
+    colors: Dict[str, str]
+):
+    bin_centers = [round(x, 2) for x in np.arange(0.4, 1.05, 0.1)]  # Crop ratios 0.4–1.0
+    summarize_all_threshold_results(
+        results_root=results_root,
+        attack_name="crop",
+        metric=metric,
+        metric_label=metric_label,
+        methods=methods,
+        colors=colors,
+        threshold_mode="min",  # smallest crop ratio that still works
+        bin_centers=bin_centers,
+        bin_width=0.1
+    )
+
+def summarize_mask_threshold(
+    results_root: str,
+    metric: str,
+    metric_label: str,
+    methods: List[str],
+    colors: Dict[str, str]
+):
+    bin_centers = [round(x, 2) for x in np.arange(0.0, 1.05, 0.05)]  # Mask coverage from 0.0 to 1.0
+    summarize_all_threshold_results(
+        results_root=results_root,
+        attack_name="mask",
+        metric=metric,
+        metric_label=metric_label,
+        methods=methods,
+        colors=colors,
+        threshold_mode="max",  # lowest masking level that still succeeds
+        bin_centers=bin_centers,
+        bin_width=0.05
+    )
+
+def summarize_overlay_threshold(
+    results_root: str,
+    metric: str,
+    metric_label: str,
+    methods: List[str],
+    colors: Dict[str, str]
+):
+    bin_centers = [round(x, 2) for x in np.arange(0.0, 1.05, 0.1)]  # Overlay strength from 0.0 to 1.0
+    summarize_all_threshold_results(
+        results_root=results_root,
+        attack_name="overlay",
+        metric=metric,
+        metric_label=metric_label,
+        methods=methods,
+        colors=colors,
+        threshold_mode="max",  # Higher overlay strength = more attack, so max successful is most robust
+        bin_centers=bin_centers,
+        bin_width=0.1
+    )
+
+def summarize_resize_threshold(
+    results_root: str,
+    metric: str,
+    metric_label: str,
+    methods: List[str],
+    colors: Dict[str, str]
+):
+    # We go from full size (1.0) down to 0.1 — smaller values are more severe attacks
+    bin_centers = [round(x, 2) for x in np.arange(1.0, 0.05, -0.1)]
+
+    summarize_all_threshold_results(
+        results_root=results_root,
+        attack_name="resize",
+        metric=metric,  # typically "scale_factor"
+        metric_label=metric_label,  # e.g., "Resize Scale Factor"
+        methods=methods,
+        colors=colors,
+        threshold_mode="min",  # we're finding the lowest scale factor that still works
+        bin_centers=bin_centers,
+        bin_width=0.1
+    )
+
+def summarize_rotate_threshold(
+    results_root: str,
+    metric: str,
+    metric_label: str,
+    methods: List[str],
+    colors: Dict[str, str]
+):
+    bin_centers = list(range(0, 20, 2))  # Rotation angles: 0–18 degrees
+    summarize_all_threshold_results(
+        results_root=results_root,
+        attack_name="rotate",
+        metric="angle",  # column name in the CSV
+        metric_label=metric_label,
+        methods=methods,
+        colors=colors,
+        threshold_mode="max",  # max rotation angle the watermark can survive
+        bin_centers=bin_centers,
+        bin_width=2
+    )
 
 
 if __name__ == "__main__":
-
+    '''
     summarize_noise_threshold(
         results_root="threshold_tests/noise_test_results",
         metric="std_dev",
@@ -416,3 +517,52 @@ if __name__ == "__main__":
         methods=["dwtDct", "dwtDctSvd", "rivaGan"],
         colors={"dwtDct": "skyblue", "dwtDctSvd": "lightgreen", "rivaGan": "salmon"},
     )
+    
+
+    summarize_crop_threshold(
+        results_root="threshold_tests/crop_test_results",
+        metric="crop_ratio",
+        metric_label="Crop Ratio",
+        methods=["dwtDct", "dwtDctSvd", "rivaGan"],
+        colors={"dwtDct": "skyblue", "dwtDctSvd": "lightgreen", "rivaGan": "salmon"}
+    )
+    
+    summarize_mask_threshold(
+        results_root="threshold_tests/mask_test_results",
+        metric="mask_fraction",  # this should match the column name in your CSV
+        metric_label="Mask Fraction",
+        methods=["dwtDct", "dwtDctSvd", "rivaGan"],
+        colors={"dwtDct": "skyblue","dwtDctSvd": "lightgreen","rivaGan": "salmon"}
+    )
+    
+
+    summarize_overlay_threshold(
+        results_root="threshold_tests/overlay_test_results",
+        metric="alpha",
+        metric_label="Overlay Alpha",
+        methods=["dwtDct", "dwtDctSvd", "rivaGan"],
+        colors={"dwtDct": "skyblue", "rivaGan": "salmon"},
+    )
+    
+    summarize_resize_threshold(
+        results_root="threshold_tests/resize_test_results",
+        metric="scale",
+        metric_label="Resize Scale Factor",
+        methods=["dwtDct", "dwtDctSvd", "rivaGan"],
+        colors={"dwtDct": "skyblue", "dwtDctSvd": "lightgreen", "rivaGan": "salmon"},
+    )
+    '''
+
+    summarize_rotate_threshold(
+        results_root="threshold_tests/rotate_test_results",
+        metric="angle",
+        metric_label="Rotation Angle (°)",
+        methods=["dwtDct", "dwtDctSvd", "rivaGan"],
+        colors={
+            "dwtDct": "skyblue",
+            "dwtDctSvd": "lightgreen",
+            "rivaGan": "salmon"
+        }
+    )
+
+

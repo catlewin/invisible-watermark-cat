@@ -1,0 +1,12 @@
+"scale","decoded","success","attack_type","can_decode_clean","first_failure","last_success"
+"clean","qing",True,"clean",True,"",""
+1.0,"qing",True,"resize",True,"",1.0
+0.9,"qing",True,"resize",True,"",0.9
+0.8,"qing",True,"resize",True,"",0.8
+0.7,"qing",True,"resize",True,"",0.7
+0.6,"qing",True,"resize",True,"",0.6
+0.5,"qing",True,"resize",True,"",0.5
+0.4,"qing",True,"resize",True,"",0.4
+0.3,"qin'",False,"resize",True,0.3,0.4
+0.2,"qin%",False,"resize",True,0.3,0.4
+0.1,"Sqn1",False,"resize",True,0.3,0.4

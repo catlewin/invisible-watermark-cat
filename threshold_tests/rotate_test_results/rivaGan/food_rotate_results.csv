@@ -1,0 +1,12 @@
+"angle","decoded","success","attack_type","can_decode_clean","first_failure","last_success"
+"clean","qing",True,"clean",True,"",""
+0,"qing",True,"rotate",True,"",0
+2,"qing",True,"rotate",True,"",2
+4,"qin'",False,"rotate",True,4,2
+6,"qhng",False,"rotate",True,4,2
+8,"qhng",False,"rotate",True,4,2
+10,"qhn'",False,"rotate",True,4,2
+12,"qhn'",False,"rotate",True,4,2
+14,"[UTF-8 Error] UnicodeDeco",False,"rotate",True,4,2
+16,"[UTF-8 Error] UnicodeDeco",False,"rotate",True,4,2
+18,"[UTF-8 Error] UnicodeDeco",False,"rotate",True,4,2
