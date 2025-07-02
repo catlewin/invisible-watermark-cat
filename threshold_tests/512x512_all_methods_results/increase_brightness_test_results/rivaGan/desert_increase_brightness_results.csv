@@ -1,0 +1,13 @@
+"brightness_factor","decoded","success","attack_type","can_decode_clean","first_failure","last_success"
+"clean","qing",True,"clean",True,"",""
+1.0,"qing",True,"brightness",True,"",1.0
+1.2,"qing",True,"brightness",True,"",1.2
+1.4,"qing",True,"brightness",True,"",1.4
+1.6,"qing",True,"brightness",True,"",1.6
+1.8,"ping",False,"brightness",True,1.8,1.6
+2.0,"ping",False,"brightness",True,1.8,1.6
+2.2,"ping",False,"brightness",True,1.8,1.6
+2.4,"ping",False,"brightness",True,1.8,1.6
+2.6,"ping",False,"brightness",True,1.8,1.6
+2.8,"ping",False,"brightness",True,1.8,1.6
+3.0,"pinG",False,"brightness",True,1.8,1.6
