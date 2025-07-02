@@ -127,3 +127,9 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# Ignore original image threshold test results
+threshold_tests/original_img_dwt_methods_results/overlay_test_results/
+threshold_tests/original_img_dwt_methods_results/resize_test_results/
+threshold_tests/original_img_dwt_methods_results/rotate_test_results/
+
