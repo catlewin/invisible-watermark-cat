@@ -1,0 +1,12 @@
+jpeg_quality,decoded,success,attack_type,can_decode_clean,first_failure,last_success,threshold,lpips_score
+clean,qi~gquan,False,clean,False,,,,
+100,[UTF-8 Error] UnicodeDeco,False,jpeg,False,100.0,,100.0,0.0005113339866511
+90,[UTF-8 Error] UnicodeDeco,False,jpeg,False,100.0,,90.0,0.0013632199261337
+80,	,False,jpeg,False,100.0,,80.0,0.0029529694002121
+70,PK~,False,jpeg,False,100.0,,70.0,0.0053305202163755
+60,@,False,jpeg,False,100.0,,60.0,0.008378205820918
+50,,False,jpeg,False,100.0,,50.0,0.0120655568316578
+40,[UTF-8 Error] UnicodeDeco,False,jpeg,False,100.0,,40.0,0.0201933998614549
+30,,False,jpeg,False,100.0,,30.0,0.0301510095596313
+20,[UTF-8 Error] UnicodeDeco,False,jpeg,False,100.0,,20.0,0.0591576248407363
+10,[UTF-8 Error] UnicodeDeco,False,jpeg,False,100.0,,10.0,0.1656622290611267

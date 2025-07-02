@@ -1,0 +1,13 @@
+std_dev,decoded,success,attack_type,can_decode_clean,first_failure,last_success,threshold,lpips_score
+clean,qing,True,clean,True,,,,
+0,qing,True,noise,True,,0.0,0.0,6.524123045460479e-17
+5,qing,True,noise,True,,5.0,5.0,0.0121599975973367
+10,qing,True,noise,True,,10.0,10.0,0.0544015243649482
+15,qing,True,noise,True,,15.0,15.0,0.1074774265289306
+20,[UTF-8 Error] UnicodeDeco,False,noise,True,20.0,15.0,20.0,0.1661547273397445
+25,[UTF-8 Error] UnicodeDeco,False,noise,True,20.0,15.0,25.0,0.2149318754673004
+30,[UTF-8 Error] UnicodeDeco,False,noise,True,20.0,15.0,30.0,0.2630085051059723
+35,[UTF-8 Error] UnicodeDeco,False,noise,True,20.0,15.0,35.0,0.3095671236515045
+40,[UTF-8 Error] UnicodeDeco,False,noise,True,20.0,15.0,40.0,0.3491234481334686
+45,[UTF-8 Error] UnicodeDeco,False,noise,True,20.0,15.0,45.0,0.3833998739719391
+50,[UTF-8 Error] UnicodeDeco,False,noise,True,20.0,15.0,50.0,0.4178032875061035

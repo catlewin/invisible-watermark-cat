@@ -1,0 +1,8 @@
+brightness_factor,decoded,success,attack_type,can_decode_clean,first_failure,last_success,threshold,lpips_score
+clean,[UTF-8 Error] UnicodeDeco,False,clean,False,,,,
+1.0,[UTF-8 Error] UnicodeDeco,False,brightness,False,1.0,,1.0,0.0
+0.8,[UTF-8 Error] UnicodeDeco,False,brightness,False,1.0,,0.8,0.0230866577476263
+0.6,[UTF-8 Error] UnicodeDeco,False,brightness,False,1.0,,0.6,0.0827308073639869
+0.4,[UTF-8 Error] UnicodeDeco,False,brightness,False,1.0,,0.4,0.1734515577554702
+0.2,,False,brightness,False,1.0,,0.2,0.3656601309776306
+0.0,,False,brightness,False,1.0,,0.0,1.033002853393555

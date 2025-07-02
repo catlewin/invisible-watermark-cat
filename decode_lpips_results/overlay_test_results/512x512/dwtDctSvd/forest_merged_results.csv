@@ -1,0 +1,13 @@
+alpha,decoded,success,attack_type,can_decode_clean,first_failure,last_success,threshold,lpips_score
+clean,qingquan,True,clean,True,,,,
+0.0,qingquan,True,overlay,True,,0.0,0.0,0.0
+0.1,[UTF-8 Error] UnicodeDeco,False,overlay,True,0.1,0.0,0.1,0.0872150212526321
+0.2,[UTF-8 Error] UnicodeDeco,False,overlay,True,0.1,0.0,0.2,0.2081674188375473
+0.3,[UTF-8 Error] UnicodeDeco,False,overlay,True,0.1,0.0,0.3,0.3040456771850586
+0.4,[UTF-8 Error] UnicodeDeco,False,overlay,True,0.1,0.0,0.4,0.3969041705131531
+0.5,[UTF-8 Error] UnicodeDeco,False,overlay,True,0.1,0.0,0.5,0.4818506836891174
+0.6,[UTF-8 Error] UnicodeDeco,False,overlay,True,0.1,0.0,0.6,0.5668636560440063
+0.7,[UTF-8 Error] UnicodeDeco,False,overlay,True,0.1,0.0,0.7,0.6604050397872925
+0.8,qh,False,overlay,True,0.1,0.0,0.8,0.7692107558250427
+0.9,,False,overlay,True,0.1,0.0,0.9,0.8766537308692932
+1.0,,False,overlay,True,0.1,0.0,1.0,0.958664059638977

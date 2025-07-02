@@ -1,0 +1,12 @@
+scale,decoded,success,attack_type,can_decode_clean,first_failure,last_success,threshold,lpips_score
+clean,qingsuan,False,clean,False,,,,
+1.0,qingsuan,False,resize,False,1.0,,1.0,0.0
+0.9,qingquan,True,resize,False,1.0,0.9,0.9,0.0026181996800005
+0.8,qingquan,True,resize,False,1.0,0.8,0.8,0.0036055194213986
+0.7,qingquan,True,resize,False,1.0,0.7,0.7,0.0053130220621824
+0.6,!iNgqt ,False,resize,False,1.0,0.7,0.6,0.008175334893167
+0.5,qingquan,True,resize,False,1.0,0.5,0.5,0.0105114905163645
+0.4,,False,resize,False,1.0,0.5,0.4,0.0219465997070074
+0.3,,False,resize,False,1.0,0.5,0.3,0.0401030182838439
+0.2,,False,resize,False,1.0,0.5,0.2,0.0826434046030044
+0.1,,False,resize,False,1.0,0.5,0.1,0.2296003997325897

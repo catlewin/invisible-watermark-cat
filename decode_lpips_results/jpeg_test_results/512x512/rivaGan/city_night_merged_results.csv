@@ -1,0 +1,12 @@
+jpeg_quality,decoded,success,attack_type,can_decode_clean,first_failure,last_success,threshold,lpips_score
+clean,qing,True,clean,True,,,,
+100,qing,True,jpeg,True,,100.0,100.0,0.0010692619252949
+90,qing,True,jpeg,True,,90.0,90.0,0.0019888766109943
+80,qing,True,jpeg,True,,80.0,80.0,0.0035527823492884
+70,qing,True,jpeg,True,,70.0,70.0,0.0055274763144552
+60,qing,True,jpeg,True,,60.0,60.0,0.0088768173009157
+50,qafg,False,jpeg,True,50.0,60.0,50.0,0.0115095824003219
+40,qanc,False,jpeg,True,50.0,60.0,40.0,0.0163345821201801
+30,qQjc,False,jpeg,True,50.0,60.0,30.0,0.026964072138071
+20,qaoe,False,jpeg,True,50.0,60.0,20.0,0.0437694229185581
+10,wȠA,False,jpeg,True,50.0,60.0,10.0,0.1017739623785018

@@ -1,0 +1,23 @@
+mask_fraction,decoded,success,attack_type,can_decode_clean,first_failure,last_success,threshold,lpips_score
+clean,[UTF-8 Error] UnicodeDeco,False,clean,False,,,,
+0.0,[UTF-8 Error] UnicodeDeco,False,mask,False,0.0,,0.0,0.0
+0.05,[UTF-8 Error] UnicodeDeco,False,mask,False,0.0,,0.05,0.0794839337468147
+0.1,[UTF-8 Error] UnicodeDeco,False,mask,False,0.0,,0.1,0.1378858238458633
+0.15,[UTF-8 Error] UnicodeDeco,False,mask,False,0.0,,0.15,0.204225018620491
+0.2,[UTF-8 Error] UnicodeDeco,False,mask,False,0.0,,0.2,0.2811985313892364
+0.25,[UTF-8 Error] UnicodeDeco,False,mask,False,0.0,,0.25,0.3561953902244568
+0.3,[UTF-8 Error] UnicodeDeco,False,mask,False,0.0,,0.3,0.405840128660202
+0.35,[UTF-8 Error] UnicodeDeco,False,mask,False,0.0,,0.35,0.4711496829986572
+0.4,[UTF-8 Error] UnicodeDeco,False,mask,False,0.0,,0.4,0.5370931029319763
+0.45,[UTF-8 Error] UnicodeDeco,False,mask,False,0.0,,0.45,0.57774817943573
+0.5,[UTF-8 Error] UnicodeDeco,False,mask,False,0.0,,0.5,0.6180314421653748
+0.55,[UTF-8 Error] UnicodeDeco,False,mask,False,0.0,,0.55,0.6653714179992676
+0.6,[UTF-8 Error] UnicodeDeco,False,mask,False,0.0,,0.6,0.6991981863975525
+0.65,[UTF-8 Error] UnicodeDeco,False,mask,False,0.0,,0.65,0.7185680270195007
+0.7,[UTF-8 Error] UnicodeDeco,False,mask,False,0.0,,0.7,0.7461621165275574
+0.75,[UTF-8 Error] UnicodeDeco,False,mask,False,0.0,,0.75,0.7818854451179504
+0.8,[UTF-8 Error] UnicodeDeco,False,mask,False,0.0,,0.8,0.79667067527771
+0.85,[UTF-8 Error] UnicodeDeco,False,mask,False,0.0,,0.85,0.8176595568656921
+0.9,[UTF-8 Error] UnicodeDeco,False,mask,False,0.0,,0.9,0.8234081268310547
+0.95,[UTF-8 Error] UnicodeDeco,False,mask,False,0.0,,0.95,0.8556970953941345
+1.0,,False,mask,False,0.0,,1.0,0.8675702810287476

@@ -1,0 +1,23 @@
+mask_fraction,decoded,success,attack_type,can_decode_clean,first_failure,last_success,threshold,lpips_score
+clean,qingquao,False,clean,False,,,,
+0.0,qingquao,False,mask,False,0.0,,0.0,0.0
+0.05,qingquao,False,mask,False,0.0,,0.05,0.0655470341444015
+0.1,qingquao,False,mask,False,0.0,,0.1,0.113993264734745
+0.15,qingquao,False,mask,False,0.0,,0.15,0.1574322283267974
+0.2,qingquao,False,mask,False,0.0,,0.2,0.214154839515686
+0.25,qideqtao,False,mask,False,0.0,,0.25,0.268032819032669
+0.3,qh,False,mask,False,0.0,,0.3,0.3265618979930877
+0.35,qh,False,mask,False,0.0,,0.35,0.3824833631515503
+0.4,q`,False,mask,False,0.0,,0.4,0.4336917698383331
+0.45,q`,False,mask,False,0.0,,0.45,0.4803888499736786
+0.5,q,False,mask,False,0.0,,0.5,0.5352574586868286
+0.55,q,False,mask,False,0.0,,0.55,0.571704089641571
+0.6,p,False,mask,False,0.0,,0.6,0.6399593353271484
+0.65,p,False,mask,False,0.0,,0.65,0.6639925837516785
+0.7,p,False,mask,False,0.0,,0.7,0.7066218852996826
+0.75,p,False,mask,False,0.0,,0.75,0.7304151058197021
+0.8,`,False,mask,False,0.0,,0.8,0.7744305729866028
+0.85,@,False,mask,False,0.0,,0.85,0.8006077408790588
+0.9,,False,mask,False,0.0,,0.9,0.8185820579528809
+0.95,[UTF-8 Error] UnicodeDeco,False,mask,False,0.0,,0.95,0.8761886358261108
+1.0,,False,mask,False,0.0,,1.0,1.0013606548309326

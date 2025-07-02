@@ -1,0 +1,23 @@
+mask_fraction,decoded,success,attack_type,can_decode_clean,first_failure,last_success,threshold,lpips_score
+clean,ahng,False,clean,False,,,,
+0.0,ahng,False,mask,False,0.0,,0.0,0.0
+0.05,aing,False,mask,False,0.0,,0.05,0.0793588310480117
+0.1,aing,False,mask,False,0.0,,0.1,0.1384922266006469
+0.15,ahn',False,mask,False,0.0,,0.15,0.2045437097549438
+0.2,a!f&,False,mask,False,0.0,,0.2,0.2824017703533172
+0.25,a!f&,False,mask,False,0.0,,0.25,0.3577686250209808
+0.3,a!f&,False,mask,False,0.0,,0.3,0.4083236157894134
+0.35,a f&,False,mask,False,0.0,,0.35,0.4737337827682495
+0.4,af&,False,mask,False,0.0,,0.4,0.5400429964065552
+0.45,a!f&,False,mask,False,0.0,,0.45,0.5804728269577026
+0.5,af&,False,mask,False,0.0,,0.5,0.6212478280067444
+0.55,af&,False,mask,False,0.0,,0.55,0.668488621711731
+0.6,aff,False,mask,False,0.0,,0.6,0.7009718418121338
+0.65,[UTF-8 Error] UnicodeDeco,False,mask,False,0.0,,0.65,0.7210728526115417
+0.7,[UTF-8 Error] UnicodeDeco,False,mask,False,0.0,,0.7,0.7481974959373474
+0.75,[UTF-8 Error] UnicodeDeco,False,mask,False,0.0,,0.75,0.7833586931228638
+0.8,[UTF-8 Error] UnicodeDeco,False,mask,False,0.0,,0.8,0.7969996929168701
+0.85,[UTF-8 Error] UnicodeDeco,False,mask,False,0.0,,0.85,0.8173516392707825
+0.9,[UTF-8 Error] UnicodeDeco,False,mask,False,0.0,,0.9,0.8241097927093506
+0.95,[UTF-8 Error] UnicodeDeco,False,mask,False,0.0,,0.95,0.8556414246559143
+1.0,,False,mask,False,0.0,,1.0,0.8660761117935181

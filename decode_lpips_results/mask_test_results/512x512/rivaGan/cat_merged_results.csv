@@ -1,0 +1,23 @@
+mask_fraction,decoded,success,attack_type,can_decode_clean,first_failure,last_success,threshold,lpips_score
+clean,qing,True,clean,True,,,,
+0.0,qing,True,mask,True,,0.0,0.0,0.0
+0.05,qing,True,mask,True,,0.05,0.05,0.0818957388401031
+0.1,qing,True,mask,True,,0.1,0.1,0.1419950127601623
+0.15,qing,True,mask,True,,0.15,0.15,0.1798340082168579
+0.2,qing,True,mask,True,,0.2,0.2,0.2346139401197433
+0.25,qing,True,mask,True,,0.25,0.25,0.2876504957675934
+0.3,qing,True,mask,True,,0.3,0.3,0.3386572301387787
+0.35,qing,True,mask,True,,0.35,0.35,0.4102215766906738
+0.4,qing,True,mask,True,,0.4,0.4,0.4710969924926758
+0.45,qing,True,mask,True,,0.45,0.45,0.5178083777427673
+0.5,qing,True,mask,True,,0.5,0.5,0.567217230796814
+0.55,qing,True,mask,True,,0.55,0.55,0.6060498952865601
+0.6,qing,True,mask,True,,0.6,0.6,0.6693792939186096
+0.65,qing,True,mask,True,,0.65,0.65,0.7003374695777893
+0.7,qing,True,mask,True,,0.7,0.7,0.7583386898040771
+0.75,qing,True,mask,True,,0.75,0.75,0.7917547225952148
+0.8,qing,True,mask,True,,0.8,0.8,0.827651858329773
+0.85,qing,True,mask,True,,0.85,0.85,0.8601373434066772
+0.9,`a.G,False,mask,True,0.9,0.85,0.9,0.8695353865623474
+0.95,[UTF-8 Error] UnicodeDeco,False,mask,True,0.9,0.85,0.95,0.8936938047409058
+1.0,,False,mask,True,0.9,0.85,1.0,0.9717680215835572

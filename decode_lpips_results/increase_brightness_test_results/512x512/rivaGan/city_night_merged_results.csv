@@ -1,0 +1,13 @@
+brightness_factor,decoded,success,attack_type,can_decode_clean,first_failure,last_success,threshold,lpips_score
+clean,qing,True,clean,True,,,,
+1.0,qing,True,brightness,True,,1.0,1.0,0.0
+1.2,qing,True,brightness,True,,1.2,1.2,0.0092757148668169
+1.4,qing,True,brightness,True,,1.4,1.4,0.0298658963292837
+1.6,qing,True,brightness,True,,1.6,1.6,0.0558389648795127
+1.8,qing,True,brightness,True,,1.8,1.8,0.0847514197230339
+2.0,qing,True,brightness,True,,2.0,2.0,0.1142971739172935
+2.2,qing,True,brightness,True,,2.2,2.2,0.1415112316608429
+2.4,qing,True,brightness,True,,2.4,2.4,0.1679712831974029
+2.6,qing,True,brightness,True,,2.6,2.6,0.1930510401725769
+2.8,qing,True,brightness,True,,2.8,2.8,0.2166466116905212
+3.0,qing,True,brightness,True,,3.0,3.0,0.2408435493707656

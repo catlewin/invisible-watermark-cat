@@ -1,0 +1,12 @@
+angle,decoded,success,attack_type,can_decode_clean,first_failure,last_success,threshold,lpips_score
+clean,qingquan,True,clean,True,,,,
+0,qingquan,True,rotate,True,,0.0,0.0,0.0
+2,[UTF-8 Error] UnicodeDeco,False,rotate,True,2.0,0.0,2.0,0.0384867861866951
+4,[UTF-8 Error] UnicodeDeco,False,rotate,True,2.0,0.0,4.0,0.0761340707540512
+6,[UTF-8 Error] UnicodeDeco,False,rotate,True,2.0,0.0,6.0,0.1203102320432663
+8,[UTF-8 Error] UnicodeDeco,False,rotate,True,2.0,0.0,8.0,0.1603319495916366
+10,[UTF-8 Error] UnicodeDeco,False,rotate,True,2.0,0.0,10.0,0.1957421153783798
+12,[UTF-8 Error] UnicodeDeco,False,rotate,True,2.0,0.0,12.0,0.2331641316413879
+14,[UTF-8 Error] UnicodeDeco,False,rotate,True,2.0,0.0,14.0,0.2646329700946808
+16,[UTF-8 Error] UnicodeDeco,False,rotate,True,2.0,0.0,16.0,0.2927550077438354
+18,[UTF-8 Error] UnicodeDeco,False,rotate,True,2.0,0.0,18.0,0.3175881803035736

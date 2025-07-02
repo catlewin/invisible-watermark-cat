@@ -1,0 +1,12 @@
+angle,decoded,success,attack_type,can_decode_clean,first_failure,last_success,threshold,lpips_score
+clean,ahng,False,clean,False,,,,
+0,ahng,False,rotate,False,0.0,,0.0,0.0
+2,ahng,False,rotate,False,0.0,,2.0,0.0319153405725955
+4,ahn',False,rotate,False,0.0,,4.0,0.0745338946580886
+6,ahn',False,rotate,False,0.0,,6.0,0.114805668592453
+8,ahn',False,rotate,False,0.0,,8.0,0.1539181619882583
+10,ahn',False,rotate,False,0.0,,10.0,0.1954376846551895
+12,A`d',False,rotate,False,0.0,,12.0,0.2366029024124145
+14,A`d',False,rotate,False,0.0,,14.0,0.2684671282768249
+16,A`d',False,rotate,False,0.0,,16.0,0.2952556610107422
+18,A`d',False,rotate,False,0.0,,18.0,0.3243148624897003
