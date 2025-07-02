@@ -1,0 +1,12 @@
+"jpeg_quality","decoded","success","attack_type","can_decode_clean","first_failure","last_success"
+"clean","qing",True,"clean",True,"",""
+100,"qing",True,"jpeg",True,"",100
+90,"qing",True,"jpeg",True,"",90
+80,"qing",True,"jpeg",True,"",80
+70,"qing",True,"jpeg",True,"",70
+60,"qing",True,"jpeg",True,"",60
+50,"qInd",False,"jpeg",True,50,60
+40,"qInd",False,"jpeg",True,50,60
+30,"q)nd",False,"jpeg",True,50,60
+20,"EYfd",False,"jpeg",True,50,60
+10,"[UTF-8 Error] UnicodeDeco",False,"jpeg",True,50,60
