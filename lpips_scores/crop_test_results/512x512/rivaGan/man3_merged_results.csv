@@ -1,0 +1,9 @@
+crop_ratio,decoded,success,attack_type,can_decode_clean,first_failure,last_success,threshold,lpips_score
+clean,qing,True,clean,True,,,,
+1.0,qing,True,crop,True,,1.0,1.0,0.0
+0.9,qing,True,crop,True,,0.9,0.9,0.1600728183984756
+0.8,qing,True,crop,True,,0.8,0.8,0.3343755900859833
+0.7,qang,False,crop,True,0.7,0.8,0.7,0.4689080119132995
+0.6,q!nf,False,crop,True,0.7,0.8,0.6,0.5612238049507141
+0.5,[UTF-8 Error] UnicodeDeco,False,crop,True,0.7,0.8,0.5,0.6330187916755676
+0.4,[UTF-8 Error] UnicodeDeco,False,crop,True,0.7,0.8,0.4,0.690095841884613

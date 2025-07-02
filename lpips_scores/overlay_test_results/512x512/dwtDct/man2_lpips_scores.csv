@@ -1,0 +1,12 @@
+filename,lpips_score
+overlay_alpha0.00.jpg,0.0
+overlay_alpha0.10.jpg,0.03118075244128704
+overlay_alpha0.20.jpg,0.08616358786821365
+overlay_alpha0.30.jpg,0.14391617476940155
+overlay_alpha0.40.jpg,0.2110634297132492
+overlay_alpha0.50.jpg,0.28084272146224976
+overlay_alpha0.60.jpg,0.3562197685241699
+overlay_alpha0.70.jpg,0.43583664298057556
+overlay_alpha0.80.jpg,0.5220470428466797
+overlay_alpha0.90.jpg,0.6270648837089539
+overlay_alpha1.00.jpg,0.725979208946228
