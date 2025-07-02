@@ -369,7 +369,7 @@ def summarize_increase_brightness_threshold(
     methods: List[str],
     colors: Dict[str, str]
 ):
-    bin_centers = [round(x, 2) for x in np.arange(1.0, 3.05, 0.2)]  # Brightness 1.0–2.0
+    bin_centers = [round(x, 2) for x in np.arange(1.0, 2.05, 0.2)]  # Brightness 1.0–2.0
     summarize_all_threshold_results(
         results_root=results_root,
         attack_name="brightness",
@@ -497,7 +497,7 @@ def summarize_rotate_threshold(
 
 
 if __name__ == "__main__":
-    '''
+    # Calls for 512x512 resized threshold tests below
     '''
     summarize_noise_threshold(
         results_root="threshold_tests/noise_test_results",
@@ -554,7 +554,7 @@ if __name__ == "__main__":
         metric="alpha",
         metric_label="Overlay Alpha",
         methods=["dwtDct", "dwtDctSvd", "rivaGan"],
-        colors={"dwtDct": "skyblue", "rivaGan": "salmon"},
+        colors={"dwtDct": "skyblue", "dwtDctSvd": "lightgreen", "rivaGan": "salmon"},
     )
     
     summarize_resize_threshold(
@@ -575,4 +575,83 @@ if __name__ == "__main__":
             "dwtDctSvd": "lightgreen",
             "rivaGan": "salmon"
         }
+    )
+    '''
+
+    # Calls for original img threshold tests below
+    # Only for dwtDct and dwtDctSvd methods -- large images use too much RAM for rivaGan
+    '''
+    
+    summarize_noise_threshold(
+        results_root="threshold_tests/original_img_dwt_methods_results/noise_test_results",
+        metric="std_dev",
+        metric_label="Gaussian Noise (σ)",
+        methods=["dwtDct", "dwtDctSvd"],
+        colors={"dwtDct": "skyblue", "dwtDctSvd": "lightgreen"},
+        bin_centers=[0, 5, 10, 15, 20, 25, 30, 35, 40],
+        bin_width=5
+    )
+    
+    summarize_jpeg_threshold(
+        results_root="threshold_tests/original_img_dwt_methods_results/jpeg_test_results",
+        metric="jpeg_quality",
+        metric_label="JPEG Quality",
+        methods=["dwtDct", "dwtDctSvd"],
+        colors={"dwtDct": "skyblue", "dwtDctSvd": "lightgreen"}
+    )
+    
+    summarize_decrease_brightness_threshold(
+        results_root="threshold_tests/original_img_dwt_methods_results/decrease_brightness_test_results",
+        metric="brightness_factor",
+        metric_label="Brightness Decrease",
+        methods=["dwtDct", "dwtDctSvd"],
+        colors={"dwtDct": "skyblue", "dwtDctSvd": "lightgreen"}
+    )
+    
+    summarize_increase_brightness_threshold(
+        results_root="threshold_tests/original_img_dwt_methods_results/increase_brightness_test_results",
+        metric="brightness_factor",
+        metric_label="Brightness Increase",
+        methods=["dwtDct", "dwtDctSvd"],
+        colors={"dwtDct": "skyblue", "dwtDctSvd": "lightgreen"}
+    )
+    
+    summarize_crop_threshold(
+        results_root="threshold_tests/original_img_dwt_methods_results/crop_test_results",
+        metric="crop_ratio",
+        metric_label="Crop Ratio",
+        methods=["dwtDct", "dwtDctSvd"],
+        colors={"dwtDct": "skyblue", "dwtDctSvd": "lightgreen"}
+    )
+    
+    summarize_mask_threshold(
+        results_root="threshold_tests/original_img_dwt_methods_results/mask_test_results",
+        metric="mask_fraction",  # this should match the column name in your CSV
+        metric_label="Mask Fraction",
+        methods=["dwtDct", "dwtDctSvd"],
+        colors={"dwtDct": "skyblue", "dwtDctSvd": "lightgreen"}
+    )
+    
+    summarize_overlay_threshold(
+        results_root="threshold_tests/original_img_dwt_methods_results/overlay_test_results",
+        metric="alpha",
+        metric_label="Overlay Alpha",
+        methods=["dwtDct", "dwtDctSvd"],
+        colors={"dwtDct": "skyblue", "dwtDctSvd": "lightgreen"}
+    )
+    
+    summarize_resize_threshold(
+        results_root="threshold_tests/original_img_dwt_methods_results/resize_test_results",
+        metric="scale",
+        metric_label="Resize Scale Factor",
+        methods=["dwtDct", "dwtDctSvd"],
+        colors={"dwtDct": "skyblue", "dwtDctSvd": "lightgreen"}
+    )
+    '''
+    summarize_rotate_threshold(
+        results_root="threshold_tests/original_img_dwt_methods_results/rotate_test_results",
+        metric="angle",
+        metric_label="Rotation Angle (°)",
+        methods=["dwtDct", "dwtDctSvd"],
+        colors={"dwtDct": "skyblue", "dwtDctSvd": "lightgreen"}
     )

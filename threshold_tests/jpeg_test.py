@@ -117,4 +117,8 @@ def batch_test_jpeg_compression(
 
 # Example usage
 if __name__ == "__main__":
-    batch_test_jpeg_compression(methods=["dwtDct", "dwtDctSvd", "rivaGan"])
+    batch_test_jpeg_compression(
+        image_root="unsplash_test_set",
+        methods=["dwtDct", "dwtDctSvd"],
+        output_dir="threshold_tests/original_img_dwt_methods_results/jpeg_test_results"
+    )

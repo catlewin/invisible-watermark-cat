@@ -105,5 +105,9 @@ def batch_test_gaussian_noise(
                     )
 
 # Example usage:
-batch_test_gaussian_noise(methods=["dwtDct", "dwtDctSvd", "rivaGan"])
+batch_test_gaussian_noise(
+    image_root="unsplash_test_set",
+    methods=["dwtDct", "dwtDctSvd"],
+    output_dir="threshold_tests/original_img_dwt_methods_results/noise_test_results"
+)
 

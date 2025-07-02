@@ -11,16 +11,28 @@ from watermark_utils import (
 
 
 def apply_mask_attack(image, mask_fraction):
-    """Apply a black rectangular mask covering a percentage of the image."""
+    """Apply a centered black rectangular mask covering a given percentage of the image area."""
     h, w = image.shape[:2]
-    mask_area = int(h * w * mask_fraction)
-    side = int(np.sqrt(mask_area))
+    total_area = h * w
+    mask_area = int(total_area * mask_fraction)
 
-    start_x = w // 2 - side // 2
-    start_y = h // 2 - side // 2
+    # Maintain aspect ratio of original image
+    aspect_ratio = w / h
+    mask_h = int(np.sqrt(mask_area / aspect_ratio))
+    mask_w = int(mask_h * aspect_ratio)
 
+    # Clip to image bounds (in case of rounding issues)
+    mask_h = min(mask_h, h)
+    mask_w = min(mask_w, w)
+
+    # Compute top-left corner for centering
+    start_x = (w - mask_w) // 2
+    start_y = (h - mask_h) // 2
+
+    # Apply black mask
     masked_image = image.copy()
-    masked_image[start_y:start_y + side, start_x:start_x + side] = 0
+    masked_image[start_y:start_y + mask_h, start_x:start_x + mask_w] = 0
+
     return masked_image
 
 
@@ -116,4 +128,8 @@ def batch_test_mask_attack(
 
 
 if __name__ == "__main__":
-    batch_test_mask_attack(methods=["dwtDct", "dwtDctSvd", "rivaGan"])
+    batch_test_mask_attack(
+        image_root="unsplash_test_set",
+        methods=["dwtDct", "dwtDctSvd"],
+        output_dir="threshold_tests/original_img_dwt_methods_results/mask_test_results"
+    )
