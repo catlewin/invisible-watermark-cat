@@ -1,0 +1,13 @@
+"alpha","decoded","success","attack_type","can_decode_clean","first_failure","last_success"
+"clean","qing",True,"clean",True,"",""
+0.0,"qing",True,"overlay",True,"",0.0
+0.1,"qing",True,"overlay",True,"",0.1
+0.2,"qing",True,"overlay",True,"",0.2
+0.3,"qing",True,"overlay",True,"",0.3
+0.4,"qing",True,"overlay",True,"",0.4
+0.5,"qifg",False,"overlay",True,0.5,0.4
+0.6,"qafg",False,"overlay",True,0.5,0.4
+0.7,"aaf",False,"overlay",True,0.5,0.4
+0.8,"[UTF-8 Error] UnicodeDeco",False,"overlay",True,0.5,0.4
+0.9,"[UTF-8 Error] UnicodeDeco",False,"overlay",True,0.5,0.4
+1.0,"[UTF-8 Error] UnicodeDeco",False,"overlay",True,0.5,0.4

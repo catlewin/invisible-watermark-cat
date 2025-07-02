@@ -1,0 +1,13 @@
+"std_dev","decoded","success","attack_type","can_decode_clean","first_failure","last_success"
+"clean","qing",True,"clean",True,"",""
+0,"qing",True,"noise",True,"",0
+5,"qing",True,"noise",True,"",5
+10,"qing",True,"noise",True,"",10
+15,"qing",True,"noise",True,"",15
+20,"[UTF-8 Error] UnicodeDeco",False,"noise",True,20,15
+25,"[UTF-8 Error] UnicodeDeco",False,"noise",True,20,15
+30,"[UTF-8 Error] UnicodeDeco",False,"noise",True,20,15
+35,"[UTF-8 Error] UnicodeDeco",False,"noise",True,20,15
+40,"[UTF-8 Error] UnicodeDeco",False,"noise",True,20,15
+45,"[UTF-8 Error] UnicodeDeco",False,"noise",True,20,15
+50,"[UTF-8 Error] UnicodeDeco",False,"noise",True,20,15
