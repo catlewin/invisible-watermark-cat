@@ -1,9 +1,0 @@
-"crop_ratio","decoded","success","attack_type","can_decode_clean","first_failure","last_success"
-"clean","qingquan",True,"clean",True,"",""
-1.0,"qingquan",True,"crop",True,"",1.0
-0.9,"[UTF-8 Error] UnicodeDeco",False,"crop",True,0.9,1.0
-0.8,"Y1GيF",False,"crop",True,0.9,1.0
-0.7,"[UTF-8 Error] UnicodeDeco",False,"crop",True,0.9,1.0
-0.6,"[UTF-8 Error] UnicodeDeco",False,"crop",True,0.9,1.0
-0.5,"[UTF-8 Error] UnicodeDeco",False,"crop",True,0.9,1.0
-0.4,"[UTF-8 Error] UnicodeDeco",False,"crop",True,0.9,1.0
