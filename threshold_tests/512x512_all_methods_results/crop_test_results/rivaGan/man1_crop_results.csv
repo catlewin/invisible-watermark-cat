@@ -1,0 +1,9 @@
+"crop_ratio","decoded","success","attack_type","can_decode_clean","first_failure","last_success"
+"clean","qing",True,"clean",True,"",""
+1.0,"qing",True,"crop",True,"",1.0
+0.9,"1ing",False,"crop",True,0.9,1.0
+0.8,"#In'",False,"crop",True,0.9,1.0
+0.7,"#Qn%",False,"crop",True,0.9,1.0
+0.6,"#Qj%",False,"crop",True,0.9,1.0
+0.5,"#qh/",False,"crop",True,0.9,1.0
+0.4,"*qh?",False,"crop",True,0.9,1.0

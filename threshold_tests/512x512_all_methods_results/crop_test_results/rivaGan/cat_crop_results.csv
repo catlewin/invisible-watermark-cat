@@ -1,0 +1,9 @@
+"crop_ratio","decoded","success","attack_type","can_decode_clean","first_failure","last_success"
+"clean","qing",True,"clean",True,"",""
+1.0,"qing",True,"crop",True,"",1.0
+0.9,"qing",True,"crop",True,"",0.9
+0.8,"qing",True,"crop",True,"",0.8
+0.7,"qang",False,"crop",True,0.7,0.8
+0.6,"[UTF-8 Error] UnicodeDeco",False,"crop",True,0.7,0.8
+0.5,"1qc/",False,"crop",True,0.7,0.8
+0.4,"P@k",False,"crop",True,0.7,0.8
