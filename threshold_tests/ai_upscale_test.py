@@ -14,16 +14,23 @@ def test_ai_upscale_attack(
     output_dir: str,
     watermark: str = "qingquan"
 ):
-    img = cv2.imread(image_path)
-    assert img is not None, f"Failed to load image: {image_path}"
+    # Paths to clean and attacked images
+    clean_path = os.path.join(os.path.dirname(image_path), "original_watermarked.jpg")
+    assert os.path.isfile(clean_path), f"Missing clean image: {clean_path}"
+    assert os.path.isfile(image_path), f"Missing upscaled image: {image_path}"
 
-    # Choose correct decode function
+    clean_img = cv2.imread(clean_path)
+    attacked_img = cv2.imread(image_path)
+    assert clean_img is not None, f"Failed to load image: {clean_path}"
+    assert attacked_img is not None, f"Failed to load image: {image_path}"
+
+    # Choose decode function
     if method == "rivaGan":
         safe_decode_fn = safe_decode_watermark_32bit
     else:
         safe_decode_fn = safe_decode_watermark
 
-    # Setup output folder and CSV
+    # Output path
     method_dir = os.path.join(output_dir, method)
     os.makedirs(method_dir, exist_ok=True)
     csv_path = os.path.join(method_dir, f"{base_name}_ai_upscale_results.csv")
@@ -33,14 +40,21 @@ def test_ai_upscale_attack(
         writer.writerow(["attack_type", "decoded", "success", "filename"])
 
         print(f"\nTesting AI UPSCALE robustness on {base_name} using {method}...")
-        decoded, success = safe_decode_fn(img, watermark, method)
-        status = "✅" if success else "❌"
-        safe_decoded = decoded[:25].encode("utf-8", "replace").decode("utf-8")
-        print(f"{'UPSCALE':>8} | {safe_decoded:<25} | {status}")
 
-        writer.writerow([
-            "ai_upscale", safe_decoded, success, os.path.basename(image_path)
-        ])
+        # Decode clean image
+        decoded_clean, success_clean = safe_decode_fn(clean_img, watermark, method)
+        status_clean = "✅" if success_clean else "❌"
+        safe_decoded_clean = decoded_clean[:25].encode("utf-8", "replace").decode("utf-8")
+        print(f"{'CLEAN':>8} | {safe_decoded_clean:<25} | {status_clean}")
+        writer.writerow(["clean", safe_decoded_clean, success_clean, os.path.basename(clean_path)])
+
+        # Decode upscaled image
+        decoded_upscaled, success_upscaled = safe_decode_fn(attacked_img, watermark, method)
+        status_upscaled = "✅" if success_upscaled else "❌"
+        safe_decoded_upscaled = decoded_upscaled[:25].encode("utf-8", "replace").decode("utf-8")
+        print(f"{'UPSCALE':>8} | {safe_decoded_upscaled:<25} | {status_upscaled}")
+        writer.writerow(["ai_upscale", safe_decoded_upscaled, success_upscaled, os.path.basename(image_path)])
+
 
 
 def batch_test_ai_upscale_attack(
