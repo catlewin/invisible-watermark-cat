@@ -32,7 +32,7 @@ def calculate_lpips_scores(image_dir, output_csv):
     results = [("filename", "lpips_score")]
 
     for fname in sorted(os.listdir(image_dir)):
-        if not fname.lower().endswith((".jpg", ".png")):
+        if not fname.lower().endswith((".jpg", ".png", ".jpeg")):
             continue
         if fname == "original_watermarked.jpg":
             continue
