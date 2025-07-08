@@ -495,6 +495,137 @@ def summarize_rotate_threshold(
         blurb="**Rotation thresholds reflect the maximum degree of rotation where watermark decoding was still successful.**"
     )
 
+def plot_combined_upscale_success(df: pd.DataFrame, output_path: str, colors: Dict[str, str]):
+    methods = df["method"].tolist()
+    successes = df["decode_success"].tolist()
+
+    plt.figure(figsize=(8, 5))
+    bars = plt.bar(methods, successes, color=[colors.get(m, "skyblue") for m in methods], edgecolor="black")
+
+    plt.title("Decode Success Frequency After Upscaling", fontsize=13)
+    plt.ylabel("Number of Successful Decodes")
+    plt.ylim(0, max(successes) + 1)
+
+    for bar, val in zip(bars, successes):
+        plt.text(bar.get_x() + bar.get_width() / 2, val + 0.2, str(val), ha='center', va='bottom')
+
+    plt.tight_layout()
+    plt.savefig(output_path)
+    plt.close()
+    print(f"✅ Saved combined upscale decode plot to {output_path}")
+
+
+def summarize_upscale_results(
+    results_root: str,
+    methods: List[str],
+    colors: Dict[str, str],
+    attack_name: str = "upscale"
+):
+    os.makedirs(results_root, exist_ok=True)
+    summary_data = []
+
+    for method in methods:
+        method_dir = os.path.join(results_root, method)
+        if not os.path.isdir(method_dir):
+            print(f"[WARNING] Skipping missing method folder: {method_dir}")
+            continue
+
+        decode_success_count = 0
+        decode_fail_count = 0
+        image_count = 0
+        failed_clean_count = 0
+
+        for file in os.listdir(method_dir):
+            if file.endswith("_results.csv"):
+                file_path = os.path.join(method_dir, file)
+                try:
+                    df = pd.read_csv(file_path)
+                    if df.empty:
+                        print(f"[WARNING] Skipping empty CSV: {file}")
+                        continue
+                    image_count += 1
+
+                    can_decode_clean = (
+                        df["attack_type"].iloc[0] == "clean"
+                        and not df["success"].iloc[0]
+                    )
+                    if can_decode_clean:
+                        failed_clean_count += 1
+                        continue
+
+                    # Find upscale row
+                    upscale_row = df[df["attack_type"] == "upscale"]
+                    if upscale_row.empty:
+                        continue
+                    success = upscale_row["success"].iloc[0]
+                    if success:
+                        decode_success_count += 1
+                    else:
+                        decode_fail_count += 1
+
+                except Exception as e:
+                    print(f"[ERROR] Failed to process {file_path}: {e}")
+                    continue
+
+        summary_data.append({
+            "method": method,
+            "image_count": image_count,
+            "fail_clean_count": failed_clean_count,
+            "decode_success": decode_success_count,
+            "decode_failure": decode_fail_count
+        })
+
+    df = pd.DataFrame(summary_data)
+    df.to_csv(os.path.join(results_root, f"{attack_name}_summary.csv"), index=False)
+
+    # Plot individual bar charts
+    for _, row in df.iterrows():
+        method = row["method"]
+        successes = row["decode_success"]
+        failures = row["decode_failure"]
+
+        plt.figure(figsize=(5, 4))
+        bars = plt.bar(["Success", "Failure"], [successes, failures], color=[colors.get(method, "gray"), "lightcoral"])
+        plt.title(f"{method} Upscale Decode Success")
+        plt.ylabel("Number of Images")
+        plt.ylim(0, max(successes + failures, 1) + 1)
+
+        for bar in bars:
+            height = bar.get_height()
+            plt.text(bar.get_x() + bar.get_width() / 2, height + 0.2, str(int(height)), ha='center', va='bottom')
+
+        plt.tight_layout()
+        out_path = os.path.join(results_root, f"{method}_upscale_decode_bar.png")
+        plt.savefig(out_path)
+        plt.close()
+        print(f"Saved individual plot for {method} to {out_path}")
+
+    # Save combined bar graph
+    combined_plot_path = os.path.join(results_root, f"{attack_name}_combined_decode_bar.png")
+    plot_combined_upscale_success(df, combined_plot_path, colors)
+
+    # Write markdown
+    md_path = os.path.join(results_root, f"{attack_name}_summary.md")
+    with open(md_path, "w") as f:
+        f.write(f"# 🧠 Upscale Decode Summary\n\n")
+        f.write("This summary reports how many images each method successfully decoded after AI upscaling.\n\n")
+        f.write("| Method | Total Images | Clean Failures | Decode Success | Decode Failure |\n")
+        f.write("|--------|---------------|----------------|----------------|----------------|\n")
+        for _, row in df.iterrows():
+            f.write(
+                f"| {row['method']} | {row['image_count']} | {row['fail_clean_count']} | {row['decode_success']} | {row['decode_failure']} |\n")
+
+        f.write("\n---\n")
+        f.write("## Combined Decode Frequencies\n")
+        f.write(f"![Combined Bar Graph]({attack_name}_combined_decode_bar.png)\n\n")
+
+        for method in df["method"]:
+            f.write(f"### {method} Decode Results\n")
+            f.write(f"![{method} Bar Graph]({method}_upscale_decode_bar.png)\n\n")
+
+    print("📄 Summary CSV, markdown, and plots saved to", results_root)
+
+
 
 if __name__ == "__main__":
     # Calls for 512x512 resized threshold tests below
@@ -647,7 +778,7 @@ if __name__ == "__main__":
         methods=["dwtDct", "dwtDctSvd"],
         colors={"dwtDct": "skyblue", "dwtDctSvd": "lightgreen"}
     )
-    '''
+    
     summarize_rotate_threshold(
         results_root="threshold_tests/original_img_dwt_methods_results/rotate_test_results",
         metric="angle",
@@ -655,3 +786,14 @@ if __name__ == "__main__":
         methods=["dwtDct", "dwtDctSvd"],
         colors={"dwtDct": "skyblue", "dwtDctSvd": "lightgreen"}
     )
+    '''
+    summarize_upscale_results(
+        results_root="threshold_tests/512x512_all_methods_results/upscale_test_results",
+        methods=["dwtDct", "dwtDctSvd", "rivaGan"],
+        colors={
+            "dwtDct": "cornflowerblue",
+            "dwtDctSvd": "darkorange",
+            "rivaGan": "seagreen"
+        }
+    )
+
