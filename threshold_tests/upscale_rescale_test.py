@@ -1,3 +1,25 @@
+"""
+📁 upscale_rescale_test.py
+
+This script performs a perceptual attack on watermarked images using a super-resolution pipeline.
+
+🔍 Context:
+The attacked images were created using the 'image-super-resolution' repository by idealo:
+https://github.com/idealo/image-super-resolution
+
+Specifically, the ISR RDN model (pretrained with 'psnr-small' weights) was used to:
+1. Super-resolve a 512×512 watermarked image to 1024×1024 (2× scale).
+2. Immediately downscale the image back to 512×512 using high-quality bicubic (LANCZOS) interpolation.
+
+🎯 Purpose:
+This upscaling and rescaling process introduces subtle changes that challenge watermark robustness
+without producing obvious visual degradation — making it ideal for perceptual robustness evaluation.
+
+The resulting images are used to test whether the embedded watermarks can still be successfully decoded
+after passing through an AI-driven perceptual transformation pipeline.
+"""
+
+
 import os
 import cv2
 import csv
