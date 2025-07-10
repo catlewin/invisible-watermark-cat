@@ -1,4 +1,0 @@
-method,image_count,fail_clean_count,decode_success,decode_failure
-dwtDct,15,11,0,4
-dwtDctSvd,15,0,8,7
-rivaGan,15,1,11,3
