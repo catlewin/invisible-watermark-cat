@@ -111,7 +111,7 @@ def decode_upscaled_images(
             if not os.path.isdir(image_dir):
                 continue
 
-            attacked_path = os.path.join(image_dir, "rescaled.jpg")
+            attacked_path = os.path.join(image_dir, "rescaled_final.jpg")
             if not os.path.exists(attacked_path):
                 print(f"❌ Missing rescaled image for {method}/{image_name}")
                 continue
@@ -154,4 +154,3 @@ if __name__ == "__main__":
     )
     '''
     decode_upscaled_images()
-
