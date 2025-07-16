@@ -1,0 +1,7 @@
+filename,lpips_score
+jpeg_quality100.jpg,3.550829569576308e-05
+jpeg_quality50.jpg,0.00099778117146343
+jpeg_quality60.jpg,0.00220662634819746
+jpeg_quality70.jpg,0.0005366236437112093
+jpeg_quality80.jpg,0.00013282931467983872
+jpeg_quality90.jpg,6.821243732701987e-05

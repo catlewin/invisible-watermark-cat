@@ -1,0 +1,8 @@
+jpeg_quality,decoded,success,attack_type,can_decode_clean,first_failure,last_success,threshold,lpips_score
+clean,qingquan,True,clean,True,,,,
+100,qingquan,True,jpeg,True,,100.0,,
+90,pI,False,jpeg,True,90.0,100.0,,
+80,,False,jpeg,True,90.0,100.0,,
+70,[UTF-8 Error] UnicodeDeco,False,jpeg,True,90.0,100.0,,
+60,,False,jpeg,True,90.0,100.0,,
+50,,False,jpeg,True,90.0,100.0,,

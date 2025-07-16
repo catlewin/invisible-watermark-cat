@@ -24,7 +24,7 @@ def test_jpeg_compression_threshold(
     quality_range: list[int] = None
 ):
     if quality_range is None:
-        quality_range = list(range(100, 0, -10))  # 100, 90, ..., 10
+        quality_range = list(range(100, 40, -10))  # 100, 90, ..., 10
 
     img = cv2.imread(image_path)
     assert img is not None, f"Failed to load image: {image_path}"

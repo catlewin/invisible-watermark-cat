@@ -1,11 +1,24 @@
 import os
 import subprocess
 
-attack_root = "threshold_tests/512x512"
-output_root = "lpips_scores"
-methods = ["dwtDct", "dwtDctSvd", "rivaGan"]
+attack_root = "threshold_tests/original"
+output_root = "lpips_scores_original"
+methods = ["dwtDct", "dwtDctSvd"]
 
-for attack_folder in ["denoising_test_results"]:
+attack_folders = [
+    "decrease_brightness_test_results",
+    "increase_brightness_test_results",
+    "crop_test_results",
+    "jpeg_test_results",
+    "mask_test_results",
+    "noise_test_results",
+    "overlay_test_results",
+    "resize_test_results",
+    "rotate_test_results"
+]
+
+
+for attack_folder in attack_folders:
     attack_path = os.path.join(attack_root, attack_folder)
     if not os.path.isdir(attack_path):
         continue
@@ -23,7 +36,7 @@ for attack_folder in ["denoising_test_results"]:
             output_csv = os.path.join(
                 output_root,
                 attack_folder,
-                "512x512",
+                "original",
                 method,
                 f"{image_folder}_lpips_scores.csv"
             )

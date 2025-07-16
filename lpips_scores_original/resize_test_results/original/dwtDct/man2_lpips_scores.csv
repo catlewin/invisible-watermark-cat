@@ -1,0 +1,11 @@
+filename,lpips_score
+resize_scale0.10.jpg,0.00866618286818266
+resize_scale0.20.jpg,0.000863592722453177
+resize_scale0.30.jpg,0.0003119091270491481
+resize_scale0.40.jpg,0.00015890697250142694
+resize_scale0.50.jpg,9.91367778624408e-05
+resize_scale0.60.jpg,9.812571079237387e-05
+resize_scale0.70.jpg,7.586910214740783e-05
+resize_scale0.80.jpg,6.467760249506682e-05
+resize_scale0.90.jpg,6.000346184009686e-05
+resize_scale1.00.jpg,0.0

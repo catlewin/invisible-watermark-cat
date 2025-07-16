@@ -1,0 +1,7 @@
+filename,lpips_score
+brightness_1.00.jpg,0.0
+brightness_1.20.jpg,0.018855787813663483
+brightness_1.40.jpg,0.08127403259277344
+brightness_1.60.jpg,0.14408370852470398
+brightness_1.80.jpg,0.19916294515132904
+brightness_2.00.jpg,0.24995157122612

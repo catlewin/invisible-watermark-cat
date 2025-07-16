@@ -1,0 +1,11 @@
+mask_fraction,decoded,success,attack_type,can_decode_clean,first_failure,last_success,threshold,lpips_score
+clean,qingquan,True,clean,True,,,,
+0.0,qingquan,True,mask,True,,0.0,0.0,0.0
+0.1,qingquan,True,mask,True,,0.1,0.1,0.113743670284748
+0.2,qingquan,True,mask,True,,0.2,0.2,0.1948203146457672
+0.3,qingquan,True,mask,True,,0.3,0.3,0.3078571557998657
+0.4,qingquan,True,mask,True,,0.4,0.4,0.4833020567893982
+0.5,,False,mask,True,0.5,0.4,0.5,0.6061306595802307
+0.6,,False,mask,True,0.5,0.4,0.6,0.7049174904823303
+0.7,,False,mask,True,0.5,0.4,0.7,0.7625491619110107
+0.8,,False,mask,True,0.5,0.4,0.8,0.8194122910499573

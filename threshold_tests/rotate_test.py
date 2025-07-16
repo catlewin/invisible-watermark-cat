@@ -27,7 +27,7 @@ def test_rotate_threshold(
     angle_range: list[int] = None
 ):
     if angle_range is None:
-        angle_range = list(range(0, 20, 2))  # 0 to 18 degrees
+        angle_range = list(range(0, 5, 2))  # 0 to 18 degrees
 
     img = cv2.imread(image_path)
     assert img is not None, f"Failed to load image: {image_path}"
@@ -112,7 +112,7 @@ def batch_test_rotate(
 
 if __name__ == "__main__":
     batch_test_rotate(
-        image_root="unsplash_test_set_resized",
-        methods=["rivaGan"],
-        output_dir="threshold_tests/TEST_threshold"
+        image_root="unsplash_test_set",
+        methods=["dwtDct", "dwtDctSvd"],
+        output_dir="threshold_tests/original/rotate_test_results"
     )

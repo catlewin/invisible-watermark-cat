@@ -1,0 +1,8 @@
+filename,lpips_score
+crop_ratio_0.40.jpg,0.4462319612503052
+crop_ratio_0.50.jpg,0.4158499240875244
+crop_ratio_0.60.jpg,0.3689328730106354
+crop_ratio_0.70.jpg,0.3268919885158539
+crop_ratio_0.80.jpg,0.24537359178066254
+crop_ratio_0.90.jpg,0.13395504653453827
+crop_ratio_1.00.jpg,0.0

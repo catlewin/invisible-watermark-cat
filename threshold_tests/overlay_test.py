@@ -25,7 +25,7 @@ def test_overlay_threshold(
     alpha_range: list[float] = None
 ):
     if alpha_range is None:
-        alpha_range = [round(x, 2) for x in np.arange(0.0, 1.05, 0.1)]  # alpha 0.0 to 1.0
+        alpha_range = [round(x, 2) for x in np.arange(0.0, 0.55, 0.1)]  # alpha 0.0 to 1.0
 
     img = cv2.imread(image_path)
     assert img is not None, f"Failed to load image: {image_path}"

@@ -27,14 +27,14 @@ def merge_lpips_and_decode(lpips_base_dir, decode_base_dir, output_base_dir, att
         for image in image_names:
             # Define file paths
             lpips_csv = os.path.join(
-                lpips_base_dir, f"{attack}_test_results", "512x512", method, f"{image}_lpips_scores.csv"
+                lpips_base_dir, f"{attack}_test_results", "original", method, f"{image}_lpips_scores.csv"
             )
             decode_csv = os.path.join(
                 decode_base_dir, f"{attack}_test_results", method,
                 f"{image}_gaussian_results.csv" if attack == "noise" else f"{image}_{attack}_results.csv"
             )
             output_csv = os.path.join(
-                output_base_dir, f"{attack}_test_results", "512x512", method, f"{image}_merged_results.csv"
+                output_base_dir, f"{attack}_test_results", "original", method, f"{image}_merged_results.csv"
             )
 
             if not os.path.exists(lpips_csv) or not os.path.exists(decode_csv):
@@ -85,10 +85,20 @@ def merge_lpips_and_decode(lpips_base_dir, decode_base_dir, output_base_dir, att
 
 
 if __name__ == "__main__":
-    attacks = ["denoising", "upscale"]
+    attacks = [
+        "decrease_brightness",
+        "increase_brightness",
+        "crop",
+        "jpeg",
+        "mask",
+        "noise",
+        "overlay",
+        "resize",
+        "rotate"
+    ]
 
     # Methods and image names remain constant
-    methods = ["dwtDct", "dwtDctSvd", "rivaGan"]
+    methods = ["dwtDct", "dwtDctSvd"]
     image_names = [
         "cat", "city_day", "city_night", "desert", "dog", "fish", "food",
         "forest", "man1", "man2", "man3", "mountain", "pages", "woman1", "woman2"
@@ -98,9 +108,9 @@ if __name__ == "__main__":
     for attack in attacks:
         print(f"\n🌀 Processing attack type: {attack}")
         merge_lpips_and_decode(
-            lpips_base_dir="lpips_scores",
-            decode_base_dir="threshold_tests/512x512",
-            output_base_dir="decode_lpips_results",
+            lpips_base_dir="lpips_scores_original",
+            decode_base_dir="threshold_tests/original",
+            output_base_dir="decode_lpips_results_original",
             attack=attack,
             methods=methods,
             image_names=image_names

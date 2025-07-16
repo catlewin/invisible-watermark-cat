@@ -324,7 +324,7 @@ def summarize_jpeg_threshold(
     methods: List[str],
     colors: Dict[str, str]
 ):
-    bin_centers = list(range(0, 105, 5))  # JPEG quality levels 0–100
+    bin_centers = list([100, 90, 80, 70, 60, 50])  # JPEG quality levels 0–100
     summarize_all_threshold_results(
         results_root=results_root,
         attack_name="jpeg",
@@ -346,7 +346,7 @@ def summarize_decrease_brightness_threshold(
     methods: List[str],
     colors: Dict[str, str]
 ):
-    bin_centers = [round(x, 2) for x in np.arange(0.0, 1.05, 0.2)]  # Brightness 0.0–1.0
+    bin_centers = [round(x, 2) for x in np.arange(0.2, 1.05, 0.2)]  # Brightness 0.0–1.0
     summarize_all_threshold_results(
         results_root=results_root,
         attack_name="brightness",
@@ -413,7 +413,7 @@ def summarize_mask_threshold(
     methods: List[str],
     colors: Dict[str, str]
 ):
-    bin_centers = [round(x, 2) for x in np.arange(0.0, 1.05, 0.05)]  # Mask coverage from 0.0 to 1.0
+    bin_centers = [round(x, 2) for x in np.arange(0.0, 0.85, 0.05)]  # Mask coverage from 0.0 to 1.0
     summarize_all_threshold_results(
         results_root=results_root,
         attack_name="mask",
@@ -435,7 +435,7 @@ def summarize_overlay_threshold(
     methods: List[str],
     colors: Dict[str, str]
 ):
-    bin_centers = [round(x, 2) for x in np.arange(0.0, 1.05, 0.1)]  # Overlay strength from 0.0 to 1.0
+    bin_centers = [round(x, 2) for x in np.arange(0.0, 0.55, 0.1)]  # Overlay strength from 0.0 to 1.0
     summarize_all_threshold_results(
         results_root=results_root,
         attack_name="overlay",
@@ -481,7 +481,7 @@ def summarize_rotate_threshold(
     methods: List[str],
     colors: Dict[str, str],
 ):
-    bin_centers = list(range(0, 20, 2))  # Rotation angles: 0–18 degrees
+    bin_centers = list(range(0, 5, 2))  # Rotation angles: 0–18 degrees
     summarize_all_threshold_results(
         results_root=results_root,
         attack_name="rotate",
@@ -813,7 +813,6 @@ if __name__ == "__main__":
 
     # Calls for original img threshold tests below
     # Only for dwtDct and dwtDctSvd methods -- large images use too much RAM for rivaGan
-    '''
     
     summarize_noise_threshold(
         results_root="threshold_tests/original/noise_test_results",
@@ -821,7 +820,7 @@ if __name__ == "__main__":
         metric_label="Gaussian Noise (σ)",
         methods=["dwtDct", "dwtDctSvd"],
         colors={"dwtDct": "skyblue", "dwtDctSvd": "lightgreen"},
-        bin_centers=[0, 5, 10, 15, 20, 25, 30, 35, 40],
+        bin_centers=[0, 5, 10, 15, 20, 25, 30, 35],
         bin_width=5
     )
     
@@ -888,7 +887,8 @@ if __name__ == "__main__":
         methods=["dwtDct", "dwtDctSvd"],
         colors={"dwtDct": "skyblue", "dwtDctSvd": "lightgreen"}
     )
-    '''
+
+    # Summary for binary results
     '''
     summarize_upscale_results(
         results_root="threshold_tests/512x512/upscale_test_results",
@@ -899,7 +899,7 @@ if __name__ == "__main__":
             "rivaGan": "seagreen"
         }
     )
-    '''
+    
     summarize_denoise_results(
         results_root="threshold_tests/512x512/denoising_test_results",
         methods=["dwtDct", "dwtDctSvd", "rivaGan"],
@@ -909,4 +909,5 @@ if __name__ == "__main__":
             "rivaGan": "seagreen"
         }
     )
+    '''
 

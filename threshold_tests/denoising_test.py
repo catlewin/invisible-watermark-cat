@@ -125,9 +125,9 @@ def decode_denoising_images(
 if __name__ == "__main__":
     '''
     batch_embed(
-        image_root="unsplash_test_set_resized",
-        methods=["dwtDct", "dwtDctSvd", "rivaGan"],
-        output_dir="threshold_tests/512x512/denoising_test_results"
+        image_root="unsplash_test_set",
+        methods=["dwtDct", "dwtDctSvd"],
+        output_dir="threshold_tests/original/denoising_test_results"
     )
     '''
 

@@ -1,0 +1,8 @@
+alpha,decoded,success,attack_type,can_decode_clean,first_failure,last_success,threshold,lpips_score
+clean,[UTF-8 Error] UnicodeDeco,False,clean,False,,,,
+0.0,[UTF-8 Error] UnicodeDeco,False,overlay,False,0.0,,0.0,0.0
+0.1,[UTF-8 Error] UnicodeDeco,False,overlay,False,0.0,,0.1,0.0150235882028937
+0.2,[UTF-8 Error] UnicodeDeco,False,overlay,False,0.0,,0.2,0.0548930875957012
+0.3,[UTF-8 Error] UnicodeDeco,False,overlay,False,0.0,,0.3,0.1099196970462799
+0.4,[UTF-8 Error] UnicodeDeco,False,overlay,False,0.0,,0.4,0.1764146387577057
+0.5,[UTF-8 Error] UnicodeDeco,False,overlay,False,0.0,,0.5,0.2600517272949219

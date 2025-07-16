@@ -44,7 +44,7 @@ def test_mask_threshold(
     mask_range: list[float] = None
 ):
     if mask_range is None:
-        mask_range = [round(x, 2) for x in np.arange(0.0, 1.05, 0.05)]
+        mask_range = [round(x, 2) for x in np.arange(0.0, 0.85, 0.1)]
 
     img = cv2.imread(image_path)
     assert img is not None, f"Failed to load image: {image_path}"

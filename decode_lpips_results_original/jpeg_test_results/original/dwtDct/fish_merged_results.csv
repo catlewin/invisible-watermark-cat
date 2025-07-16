@@ -1,0 +1,8 @@
+jpeg_quality,decoded,success,attack_type,can_decode_clean,first_failure,last_success,threshold,lpips_score
+clean,[UTF-8 Error] UnicodeDeco,False,clean,False,,,,
+100,[UTF-8 Error] UnicodeDeco,False,jpeg,False,100.0,,,
+90,[UTF-8 Error] UnicodeDeco,False,jpeg,False,100.0,,,
+80,[UTF-8 Error] UnicodeDeco,False,jpeg,False,100.0,,,
+70,[UTF-8 Error] UnicodeDeco,False,jpeg,False,100.0,,,
+60,[UTF-8 Error] UnicodeDeco,False,jpeg,False,100.0,,,
+50,[UTF-8 Error] UnicodeDeco,False,jpeg,False,100.0,,,

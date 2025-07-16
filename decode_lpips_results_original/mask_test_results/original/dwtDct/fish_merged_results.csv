@@ -1,0 +1,11 @@
+mask_fraction,decoded,success,attack_type,can_decode_clean,first_failure,last_success,threshold,lpips_score
+clean,[UTF-8 Error] UnicodeDeco,False,clean,False,,,,
+0.0,[UTF-8 Error] UnicodeDeco,False,mask,False,0.0,,0.0,0.0
+0.1,[UTF-8 Error] UnicodeDeco,False,mask,False,0.0,,0.1,0.1245987266302108
+0.2,qingquan,True,mask,False,0.0,0.2,0.2,0.2339551448822021
+0.3,qingquan,True,mask,False,0.0,0.3,0.3,0.3334086537361145
+0.4,qingquan,True,mask,False,0.0,0.4,0.4,0.4533878862857818
+0.5,@n,False,mask,False,0.0,0.4,0.5,0.5637630224227905
+0.6,,False,mask,False,0.0,0.4,0.6,0.6651052236557007
+0.7,,False,mask,False,0.0,0.4,0.7,0.7599369287490845
+0.8,,False,mask,False,0.0,0.4,0.8,0.8240257501602173

@@ -24,7 +24,7 @@ def test_brightness_decrease_threshold(
     brightness_range: list[float] = None,
 ):
     if brightness_range is None:
-        brightness_range = [1.0, 0.8, 0.6, 0.4, 0.2, 0.0]  # up to and including 1.0
+        brightness_range = [1.0, 0.8, 0.6, 0.4, 0.2]  # up to and including 1.0
 
     img = cv2.imread(image_path)
     assert img is not None, f"Failed to load image: {image_path}"

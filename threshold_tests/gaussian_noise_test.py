@@ -18,7 +18,7 @@ def test_gaussian_noise_threshold(
     noise_std_range: list[float] = None
 ):
     if noise_std_range is None:
-        noise_std_range = list(range(0, 51, 5))  # [0, 5, ..., 50]
+        noise_std_range = list(range(0, 36, 5))  # [0, 5, ..., 50]
 
     img = cv2.imread(image_path)
     assert img is not None, f"Failed to load image: {image_path}"

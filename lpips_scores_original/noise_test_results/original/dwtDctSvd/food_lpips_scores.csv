@@ -1,0 +1,9 @@
+filename,lpips_score
+gaussian_std0.jpg,0.0
+gaussian_std10.jpg,0.00024559389567002654
+gaussian_std15.jpg,0.00064423109870404
+gaussian_std20.jpg,0.0013051392743363976
+gaussian_std25.jpg,0.0020467753056436777
+gaussian_std30.jpg,0.00308515434153378
+gaussian_std35.jpg,0.004300639033317566
+gaussian_std5.jpg,5.973289444227703e-05
