@@ -1,4 +1,4 @@
-| Attack | Method | Clean Decode ↑ | Threshold ↑ | LPIPS at Failure ↓ |
+| Attack | Method | Clean Decode (Resized → Original) | Threshold (Resized → Original) | LPIPS at Failure (Resized → Original) |
 |--------|--------|----------------|--------------|---------------------|
 | crop | dwtDct | 4 → 13 | 0.9 ± 0.0 → 0.9 ± 0.0 | 0.164 ± 0.031 → 0.164 ± 0.036 |
 | crop | dwtDctSvd | 14 → 15 | 0.9 ± 0.0 → 0.9 ± 0.0 | 0.17 ± 0.037 → 0.17 ± 0.036 |

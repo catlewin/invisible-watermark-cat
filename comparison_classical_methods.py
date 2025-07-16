@@ -7,10 +7,6 @@ attacks = [
     "noise", "overlay", "resize", "rotate"
 ]
 methods = ["dwtDct", "dwtDctSvd"]
-images = [
-    "cat", "city_day", "city_night", "desert", "dog", "fish", "food",
-    "forest", "man1", "man2", "man3", "mountain", "pages", "woman1", "woman2"
-]
 
 resized_dir = "decode_lpips_results"
 original_dir = "decode_lpips_results_original"
@@ -40,7 +36,15 @@ def parse_stats(folder):
 
     return clean_count, thresholds, lpips_scores
 
+def fmt_stats(values):
+    if values:
+        avg = round(np.mean(values), 3)
+        std = round(np.std(values), 3)
+        return f"{avg} ± {std}"
+    else:
+        return "--"
 
+# Gather stats
 for attack in attacks:
     for method in methods:
         resized_path = os.path.join(resized_dir, f"{attack}_test_results", "512x512", method)
@@ -51,33 +55,44 @@ for attack in attacks:
         r_clean, r_thresh, r_lpips = parse_stats(resized_path)
         o_clean, o_thresh, o_lpips = parse_stats(original_path)
 
-        # Format with average ± std, or fallback to "--"
-        def fmt_stats(values):
-            if values:
-                avg = round(np.mean(values), 3)
-                std = round(np.std(values), 3)
-                return f"{avg} ± {std}"
-            else:
-                return "--"
-
         summary.append({
             "Attack": attack,
             "Method": method,
-            "Clean Decode ↑": f"{r_clean} → {o_clean}",
-            "Threshold ↑": f"{fmt_stats(r_thresh)} → {fmt_stats(o_thresh)}",
-            "LPIPS at Failure ↓": f"{fmt_stats(r_lpips)} → {fmt_stats(o_lpips)}"
+            "Clean Decode (Resized → Original)": f"{r_clean} → {o_clean}",
+            "Threshold (Resized → Original)": f"{fmt_stats(r_thresh)} → {fmt_stats(o_thresh)}",
+            "LPIPS at Failure (Resized → Original)": f"{fmt_stats(r_lpips)} → {fmt_stats(o_lpips)}"
         })
 
-# Save to markdown
+# Create DataFrame
 df = pd.DataFrame(summary)
 df = df.sort_values(by=["Attack", "Method"])
 
+# Save Markdown
 md_path = "original_vs_resized_comparison_detailed.md"
-
 with open(md_path, "w") as f:
     f.write("| Attack | Method | Clean Decode (Resized → Original) | Threshold (Resized → Original) | LPIPS at Failure (Resized → Original) |\n")
     f.write("|--------|--------|----------------|--------------|---------------------|\n")
     for _, row in df.iterrows():
-        f.write(f"| {row['Attack']} | {row['Method']} | {row['Clean Decode ↑']} | {row['Threshold ↑']} | {row['LPIPS at Failure ↓']} |\n")
+        f.write(
+            f"| {row['Attack']} | {row['Method']} | {row['Clean Decode (Resized → Original)']} | "
+            f"{row['Threshold (Resized → Original)']} | {row['LPIPS at Failure (Resized → Original)']} |\n"
+        )
 
-print("✅ Detailed comparison written to original_vs_resized_comparison_detailed.md")
+# Save to LaTeX
+latex_path = "original_vs_resized_comparison_detailed.tex"
+with open("original_vs_resized_comparison_latex.tex", "w") as f:
+    f.write("\\begin{table}[h!]\n\\centering\n")
+    f.write("\\begin{tabular}{llccc}\n\\toprule\n")
+    f.write("Attack & Method & Clean Decode & Threshold & LPIPS at Failure \\\\\n")
+    f.write("\\midrule\n")
+    for _, row in df.iterrows():
+        attack = row["Attack"].replace("_", "\\_")  # escape LaTeX underscores
+        f.write(
+            f"{attack} & {row['Method']} & {row['Clean Decode (Resized → Original)']} & "
+            f"{row['Threshold (Resized → Original)']} & {row['LPIPS at Failure (Resized → Original)']} \\\\\n"
+        )
+    f.write("\\bottomrule\n\\end{tabular}\n")
+    f.write("\\caption{Comparison of clean decode counts, average thresholds, and LPIPS at first failure between resized and original images.}\n")
+    f.write("\\label{tab:original_vs_resized}\n\\end{table}\n")
+
+print("📄 LaTeX table saved as original_vs_resized_comparison_latex.tex")
