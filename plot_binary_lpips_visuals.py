@@ -89,3 +89,33 @@ for attack in attacks:
         plt.savefig(avg_path)
         plt.close()
         print(f"✅ Saved average LPIPS plot: {avg_path}")
+
+    # 📝 Create markdown summary
+    md_lines = [
+        f"# {attack.capitalize()} LPIPS Analysis\n",
+        "## Average LPIPS ± Std Dev\n",
+        f"![Avg LPIPS](./{attack}_avg_lpips_per_method.png)\n",
+        "## Per-Image LPIPS by Method\n"
+    ]
+
+    for method in methods:
+        method_pretty = {
+            "dwtDct": "DWT-DCT",
+            "dwtDctSvd": "DWT-DCT-SVD",
+            "rivaGan": "RivaGAN"
+        }.get(method, method)
+
+        md_lines.extend([
+            f"### {method_pretty}\n",
+            f"![{method_pretty}](./{attack}_{method}_lpips_per_image.png)\n"
+        ])
+
+    md_lines.append("*Bar color indicates decode result: green = success, red = failure.*\n")
+
+    # Save .md file
+    md_path = os.path.join(output_dir, f"{attack}_summary.md")
+    with open(md_path, "w") as f:
+        f.write("\n".join(md_lines))
+
+    print(f"📝 Saved markdown summary: {md_path}")
+
