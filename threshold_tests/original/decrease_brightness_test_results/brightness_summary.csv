@@ -1,3 +1,0 @@
-method,image_count,fail_clean_count,fail_attack_count,average_threshold,median_threshold,std_dev_threshold,min_threshold,max_threshold
-dwtDct,15,2,2,0.8,0.8,0.14,0.4,1.0
-dwtDctSvd,15,0,0,0.63,0.8,0.29,0.2,1.0
