@@ -1,0 +1,3 @@
+upscale,decoded,success,attack_type,can_decode_clean,first_failure,last_success,lpips_score
+clean,qi~gquan,False,clean,False,,,
+upscale,P?,False,upscale,,,,0.007074839901179

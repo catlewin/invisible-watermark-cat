@@ -1,0 +1,3 @@
+upscale,decoded,success,attack_type,can_decode_clean,first_failure,last_success,lpips_score
+clean,qmngquqn,False,clean,False,,,
+upscale,[UTF-8 Error] UnicodeDeco,False,upscale,,,,0.004397228360176

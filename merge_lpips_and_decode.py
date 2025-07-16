@@ -21,6 +21,8 @@ def extract_threshold_from_filename(filename, attack):
 
 
 def merge_lpips_and_decode(lpips_base_dir, decode_base_dir, output_base_dir, attack, methods, image_names):
+    binary_attacks = ["upscale", "denoising"]
+
     for method in methods:
         for image in image_names:
             # Define file paths
@@ -35,45 +37,55 @@ def merge_lpips_and_decode(lpips_base_dir, decode_base_dir, output_base_dir, att
                 output_base_dir, f"{attack}_test_results", "512x512", method, f"{image}_merged_results.csv"
             )
 
-            # Skip if files are missing
             if not os.path.exists(lpips_csv) or not os.path.exists(decode_csv):
+                print(f"⚠️ Missing file(s): {lpips_csv} or {decode_csv}")
                 continue
 
-            # Read CSVs
             df_lpips = pd.read_csv(lpips_csv)
             df_decode = pd.read_csv(decode_csv)
 
-            # Parse and normalize thresholds
-            df_lpips["threshold"] = df_lpips["filename"].apply(lambda f: extract_threshold_from_filename(f, attack))
-            df_lpips["threshold"] = pd.to_numeric(df_lpips["threshold"], errors='coerce').round(3)
-
             decode_key = df_decode.columns[0]
-            df_clean = df_decode[df_decode[decode_key] == "clean"]
-            df_attacked = df_decode[df_decode[decode_key] != "clean"].copy()
-            df_attacked[decode_key] = pd.to_numeric(df_attacked[decode_key], errors='coerce').round(3)
 
-            # Merge on threshold
-            merged_attacked = pd.merge(
-                df_attacked,
-                df_lpips[["threshold", "lpips_score"]],
-                left_on=decode_key,
-                right_on="threshold",
-                how="left"
-            )
+            # Handle binary attacks differently (no thresholds)
+            if attack in binary_attacks:
+                df_lpips["attack_type"] = df_lpips["filename"].apply(lambda f: "clean" if "original_watermarked" in f else attack)
+                merged_df = pd.merge(
+                    df_decode,
+                    df_lpips[["attack_type", "lpips_score"]],
+                    on="attack_type",
+                    how="left"
+                )
+            else:
+                # Parse and normalize thresholds
+                df_lpips["threshold"] = df_lpips["filename"].apply(lambda f: extract_threshold_from_filename(f, attack))
+                df_lpips["threshold"] = pd.to_numeric(df_lpips["threshold"], errors='coerce').round(3)
 
-            # Combine clean + merged attacked rows
-            merged_df = pd.concat([df_clean, merged_attacked], ignore_index=True)
+                df_clean = df_decode[df_decode[decode_key] == "clean"]
+                df_attacked = df_decode[df_decode[decode_key] != "clean"].copy()
+                df_attacked[decode_key] = pd.to_numeric(df_attacked[decode_key], errors='coerce').round(3)
+
+                # Merge on threshold
+                merged_attacked = pd.merge(
+                    df_attacked,
+                    df_lpips[["threshold", "lpips_score"]],
+                    left_on=decode_key,
+                    right_on="threshold",
+                    how="left"
+                )
+
+                # Combine clean + merged attacked rows
+                merged_df = pd.concat([df_clean, merged_attacked], ignore_index=True)
 
             os.makedirs(os.path.dirname(output_csv), exist_ok=True)
             merged_df.to_csv(output_csv, index=False)
+            print(f"✅ Saved merged: {output_csv}")
+
 
 
 
 
 if __name__ == "__main__":
-    attacks = [
-        "mask"
-    ]
+    attacks = ["denoising", "upscale"]
 
     # Methods and image names remain constant
     methods = ["dwtDct", "dwtDctSvd", "rivaGan"]

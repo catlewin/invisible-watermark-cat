@@ -1,0 +1,3 @@
+upscale,decoded,success,attack_type,can_decode_clean,first_failure,last_success,lpips_score
+clean,qingquan,True,clean,True,,,
+upscale,qingquan,True,upscale,,,,0.0022275652736425

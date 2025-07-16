@@ -5,7 +5,7 @@ attack_root = "threshold_tests/512x512_all_methods_results"
 output_root = "lpips_scores"
 methods = ["dwtDct", "dwtDctSvd", "rivaGan"]
 
-for attack_folder in os.listdir(attack_root):
+for attack_folder in ["denoising_test_results"]:
     attack_path = os.path.join(attack_root, attack_folder)
     if not os.path.isdir(attack_path):
         continue
@@ -30,10 +30,34 @@ for attack_folder in os.listdir(attack_root):
             os.makedirs(os.path.dirname(output_csv), exist_ok=True)
 
             print(f"🔎 Processing: {image_path}")
-            cmd = [
-                "python",
-                "calculate_lpips_scores.py",
-                "--dir", image_path,
-                "--output_csv", output_csv
-            ]
-            subprocess.run(cmd, check=True)
+
+            # ⬇️ Handle special case for upscale
+            if attack_folder == "upscale_test_results":
+                # Create a temporary directory with just the needed files
+                from tempfile import TemporaryDirectory
+                import shutil
+
+                with TemporaryDirectory() as tmpdir:
+                    src_img = os.path.join(image_path, "rescaled_final.jpg")
+                    ref_img = os.path.join(image_path, "original_watermarked.jpg")
+                    if not (os.path.exists(src_img) and os.path.exists(ref_img)):
+                        print(f"⚠️ Skipping {image_path} — required files missing")
+                        continue
+                    shutil.copy(src_img, os.path.join(tmpdir, "rescaled_final.jpg"))
+                    shutil.copy(ref_img, os.path.join(tmpdir, "original_watermarked.jpg"))
+
+                    cmd = [
+                        "python",
+                        "calculate_lpips_scores.py",
+                        "--dir", tmpdir,
+                        "--output_csv", output_csv
+                    ]
+                    subprocess.run(cmd, check=True)
+            else:
+                cmd = [
+                    "python",
+                    "calculate_lpips_scores.py",
+                    "--dir", image_path,
+                    "--output_csv", output_csv
+                ]
+                subprocess.run(cmd, check=True)

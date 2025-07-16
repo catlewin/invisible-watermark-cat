@@ -1,0 +1,3 @@
+denoising,decoded,success,attack_type,can_decode_clean,first_failure,last_success,lpips_score
+clean,qing,True,clean,True,,,
+denoising,qing,True,denoising,,,,0.0251149870455265
