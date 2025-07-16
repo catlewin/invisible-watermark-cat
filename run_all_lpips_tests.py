@@ -1,7 +1,7 @@
 import os
 import subprocess
 
-attack_root = "threshold_tests/512x512_all_methods_results"
+attack_root = "threshold_tests/512x512"
 output_root = "lpips_scores"
 methods = ["dwtDct", "dwtDctSvd", "rivaGan"]
 

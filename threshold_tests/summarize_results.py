@@ -816,7 +816,7 @@ if __name__ == "__main__":
     '''
     
     summarize_noise_threshold(
-        results_root="threshold_tests/original_img_dwt_methods_results/noise_test_results",
+        results_root="threshold_tests/original/noise_test_results",
         metric="std_dev",
         metric_label="Gaussian Noise (σ)",
         methods=["dwtDct", "dwtDctSvd"],
@@ -826,7 +826,7 @@ if __name__ == "__main__":
     )
     
     summarize_jpeg_threshold(
-        results_root="threshold_tests/original_img_dwt_methods_results/jpeg_test_results",
+        results_root="threshold_tests/original/jpeg_test_results",
         metric="jpeg_quality",
         metric_label="JPEG Quality",
         methods=["dwtDct", "dwtDctSvd"],
@@ -834,7 +834,7 @@ if __name__ == "__main__":
     )
     
     summarize_decrease_brightness_threshold(
-        results_root="threshold_tests/original_img_dwt_methods_results/decrease_brightness_test_results",
+        results_root="threshold_tests/original/decrease_brightness_test_results",
         metric="brightness_factor",
         metric_label="Brightness Decrease",
         methods=["dwtDct", "dwtDctSvd"],
@@ -842,7 +842,7 @@ if __name__ == "__main__":
     )
     
     summarize_increase_brightness_threshold(
-        results_root="threshold_tests/original_img_dwt_methods_results/increase_brightness_test_results",
+        results_root="threshold_tests/original/increase_brightness_test_results",
         metric="brightness_factor",
         metric_label="Brightness Increase",
         methods=["dwtDct", "dwtDctSvd"],
@@ -850,7 +850,7 @@ if __name__ == "__main__":
     )
     
     summarize_crop_threshold(
-        results_root="threshold_tests/original_img_dwt_methods_results/crop_test_results",
+        results_root="threshold_tests/original/crop_test_results",
         metric="crop_ratio",
         metric_label="Crop Ratio",
         methods=["dwtDct", "dwtDctSvd"],
@@ -858,7 +858,7 @@ if __name__ == "__main__":
     )
     
     summarize_mask_threshold(
-        results_root="threshold_tests/original_img_dwt_methods_results/mask_test_results",
+        results_root="threshold_tests/original/mask_test_results",
         metric="mask_fraction",  # this should match the column name in your CSV
         metric_label="Mask Fraction",
         methods=["dwtDct", "dwtDctSvd"],
@@ -866,7 +866,7 @@ if __name__ == "__main__":
     )
     
     summarize_overlay_threshold(
-        results_root="threshold_tests/original_img_dwt_methods_results/overlay_test_results",
+        results_root="threshold_tests/original/overlay_test_results",
         metric="alpha",
         metric_label="Overlay Alpha",
         methods=["dwtDct", "dwtDctSvd"],
@@ -874,7 +874,7 @@ if __name__ == "__main__":
     )
     
     summarize_resize_threshold(
-        results_root="threshold_tests/original_img_dwt_methods_results/resize_test_results",
+        results_root="threshold_tests/original/resize_test_results",
         metric="scale",
         metric_label="Resize Scale Factor",
         methods=["dwtDct", "dwtDctSvd"],
@@ -882,7 +882,7 @@ if __name__ == "__main__":
     )
     
     summarize_rotate_threshold(
-        results_root="threshold_tests/original_img_dwt_methods_results/rotate_test_results",
+        results_root="threshold_tests/original/rotate_test_results",
         metric="angle",
         metric_label="Rotation Angle (°)",
         methods=["dwtDct", "dwtDctSvd"],
@@ -891,7 +891,7 @@ if __name__ == "__main__":
     '''
     '''
     summarize_upscale_results(
-        results_root="threshold_tests/512x512_all_methods_results/upscale_test_results",
+        results_root="threshold_tests/512x512/upscale_test_results",
         methods=["dwtDct", "dwtDctSvd", "rivaGan"],
         colors={
             "dwtDct": "cornflowerblue",
@@ -901,7 +901,7 @@ if __name__ == "__main__":
     )
     '''
     summarize_denoise_results(
-        results_root="threshold_tests/512x512_all_methods_results/denoising_test_results",
+        results_root="threshold_tests/512x512/denoising_test_results",
         methods=["dwtDct", "dwtDctSvd", "rivaGan"],
         colors={
             "dwtDct": "cornflowerblue",

@@ -121,5 +121,5 @@ if __name__ == "__main__":
     batch_test_crop_threshold(
         image_root="unsplash_test_set",
         methods=["dwtDct", "dwtDctSvd"],
-        output_dir="threshold_tests/original_img_dwt_methods_results/crop_test_results"
+        output_dir="threshold_tests/original/crop_test_results"
     )

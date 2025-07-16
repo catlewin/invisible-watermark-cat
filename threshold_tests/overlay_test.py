@@ -118,5 +118,5 @@ if __name__ == "__main__":
     batch_test_overlay(
         image_root="unsplash_test_set",
         methods=["dwtDct", "dwtDctSvd"],
-        output_dir="threshold_tests/original_img_dwt_methods_results/overlay_test_results"
+        output_dir="threshold_tests/original/overlay_test_results"
     )

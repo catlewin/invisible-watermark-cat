@@ -99,7 +99,7 @@ if __name__ == "__main__":
         print(f"\n🌀 Processing attack type: {attack}")
         merge_lpips_and_decode(
             lpips_base_dir="lpips_scores",
-            decode_base_dir="threshold_tests/512x512_all_methods_results",
+            decode_base_dir="threshold_tests/512x512",
             output_base_dir="decode_lpips_results",
             attack=attack,
             methods=methods,

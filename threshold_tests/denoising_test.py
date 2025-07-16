@@ -12,7 +12,7 @@ from watermark_utils import (
 def embed_images(
     image_path: str,
     method: str = "dwtDct",
-    output_dir: str = "threshold_tests/512x512_all_methods_results/denoising_test_results",
+    output_dir: str = "threshold_tests/512x512/denoising_test_results",
     watermark: str = "qingquan"
 ):
     img = cv2.imread(image_path)
@@ -58,7 +58,7 @@ def embed_images(
 def batch_embed(
     image_root: str = "unsplash_test_set_resized",
     methods: list[str] = ["dwtDct", "dwtDctSvd", "rivaGan"],
-    output_dir: str = "threshold_tests/512x512_all_methods_results/denoising_test_results",
+    output_dir: str = "threshold_tests/512x512/denoising_test_results",
     watermark: str = "qingquan"
 ):
     for root, _, files in os.walk(image_root):
@@ -75,7 +75,7 @@ def batch_embed(
                     )
 
 def decode_denoising_images(
-    input_root: str = "threshold_tests/512x512_all_methods_results/denoising_test_results",
+    input_root: str = "threshold_tests/512x512/denoising_test_results",
     methods: list[str] = ["dwtDct", "dwtDctSvd", "rivaGan"],
     watermark: str = "qingquan"
 ):
@@ -127,7 +127,7 @@ if __name__ == "__main__":
     batch_embed(
         image_root="unsplash_test_set_resized",
         methods=["dwtDct", "dwtDctSvd", "rivaGan"],
-        output_dir="threshold_tests/512x512_all_methods_results/denoising_test_results"
+        output_dir="threshold_tests/512x512/denoising_test_results"
     )
     '''
 
