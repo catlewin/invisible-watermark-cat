@@ -1,10 +1,10 @@
 std_dev,decoded,success,attack_type,can_decode_clean,first_failure,last_success,threshold,lpips_score
 clean,qingquan,True,clean,True,,,,
-0,qingquan,True,noise,True,,0.0,,
-5,qingquan,True,noise,True,,5.0,,
-10,qingquan,True,noise,True,,10.0,,
-15,[UTF-8 Error] UnicodeDeco,False,noise,True,15.0,10.0,,
-20,[UTF-8 Error] UnicodeDeco,False,noise,True,15.0,10.0,,
-25,[UTF-8 Error] UnicodeDeco,False,noise,True,15.0,10.0,,
-30,[UTF-8 Error] UnicodeDeco,False,noise,True,15.0,10.0,,
-35,[UTF-8 Error] UnicodeDeco,False,noise,True,15.0,10.0,,
+0,qingquan,True,noise,True,,0.0,0.0,0.0
+5,qingquan,True,noise,True,,5.0,5.0,0.000171822757693
+10,qingquan,True,noise,True,,10.0,10.0,0.0003182188374921
+15,[UTF-8 Error] UnicodeDeco,False,noise,True,15.0,10.0,15.0,0.0005529996124096
+20,[UTF-8 Error] UnicodeDeco,False,noise,True,15.0,10.0,20.0,0.0009986018994823
+25,[UTF-8 Error] UnicodeDeco,False,noise,True,15.0,10.0,25.0,0.0018989979289472
+30,[UTF-8 Error] UnicodeDeco,False,noise,True,15.0,10.0,30.0,0.0030348133295774
+35,[UTF-8 Error] UnicodeDeco,False,noise,True,15.0,10.0,35.0,0.0042649963870644

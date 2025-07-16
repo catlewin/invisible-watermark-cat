@@ -2,22 +2,34 @@ import os
 import pandas as pd
 import re
 
+import re
+
 def extract_threshold_from_filename(filename, attack):
     """
     Extracts numeric threshold for merging LPIPS and decode results.
-    Handles attack-specific filename formats:
-    - mask: 'mask_frac25.jpg' → 0.25
-    - others: 'crop_ratio_0.40.jpg' → 0.40
     """
     if attack == "mask":
         match = re.search(r"mask_frac(\d+)", filename)
         if match:
             return float(match.group(1)) / 100
+    elif attack == "jpeg":
+        match = re.search(r'quality(\d+)', filename)
+        if match:
+            return float(match.group(1))
+    elif attack == "noise":
+        match = re.search(r'std(\d+)', filename)  # updated
+        if match:
+            return float(match.group(1))
+    elif attack == "rotate":
+        match = re.search(r'rotate_([0-9]+(?:\.[0-9]+)?)', filename)  # updated
+        if match:
+            return float(match.group(1))
     else:
-        match = re.search(r'([0-9]+\.[0-9]+)(?=\.jpg$|\.png$)', filename)
+        match = re.search(r'([0-9]+(?:\.[0-9]+)?)', filename)
         if match:
             return float(match.group(1))
     return None
+
 
 
 def merge_lpips_and_decode(lpips_base_dir, decode_base_dir, output_base_dir, attack, methods, image_names):
@@ -58,11 +70,26 @@ def merge_lpips_and_decode(lpips_base_dir, decode_base_dir, output_base_dir, att
             else:
                 # Parse and normalize thresholds
                 df_lpips["threshold"] = df_lpips["filename"].apply(lambda f: extract_threshold_from_filename(f, attack))
-                df_lpips["threshold"] = pd.to_numeric(df_lpips["threshold"], errors='coerce').round(3)
+
+                # Add per-attack rounding
+                round_digits = {
+                    "jpeg": 0,
+                    "noise": 3,
+                    "crop": 3,
+                    "mask": 3,
+                    "resize": 3,
+                    "rotate": 3,
+                    "overlay": 3,
+                    "decrease_brightness": 3,
+                    "increase_brightness": 3
+                }
+                round_to = round_digits.get(attack, 3)
+
+                df_lpips["threshold"] = pd.to_numeric(df_lpips["threshold"], errors='coerce').round(round_to)
 
                 df_clean = df_decode[df_decode[decode_key] == "clean"]
                 df_attacked = df_decode[df_decode[decode_key] != "clean"].copy()
-                df_attacked[decode_key] = pd.to_numeric(df_attacked[decode_key], errors='coerce').round(3)
+                df_attacked[decode_key] = pd.to_numeric(df_attacked[decode_key], errors='coerce').round(round_to)
 
                 # Merge on threshold
                 merged_attacked = pd.merge(

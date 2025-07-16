@@ -1,5 +1,5 @@
 angle,decoded,success,attack_type,can_decode_clean,first_failure,last_success,threshold,lpips_score
 clean,qingquan,True,clean,True,,,,
-0,qingquan,True,rotate,True,,0.0,,
-2,,False,rotate,True,2.0,0.0,,
-4,,False,rotate,True,2.0,0.0,,
+0,qingquan,True,rotate,True,,0.0,0.0,0.0
+2,,False,rotate,True,2.0,0.0,2.0,0.0711368322372436
+4,,False,rotate,True,2.0,0.0,4.0,0.1187066063284874

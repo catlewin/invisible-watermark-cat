@@ -1,5 +1,5 @@
 angle,decoded,success,attack_type,can_decode_clean,first_failure,last_success,threshold,lpips_score
 clean,[UTF-8 Error] UnicodeDeco,False,clean,False,,,,
-0,[UTF-8 Error] UnicodeDeco,False,rotate,False,0.0,,,
-2,[UTF-8 Error] UnicodeDeco,False,rotate,False,0.0,,,
-4,[UTF-8 Error] UnicodeDeco,False,rotate,False,0.0,,,
+0,[UTF-8 Error] UnicodeDeco,False,rotate,False,0.0,,0.0,0.0
+2,[UTF-8 Error] UnicodeDeco,False,rotate,False,0.0,,2.0,0.0731931403279304
+4,[UTF-8 Error] UnicodeDeco,False,rotate,False,0.0,,4.0,0.1380323618650436
