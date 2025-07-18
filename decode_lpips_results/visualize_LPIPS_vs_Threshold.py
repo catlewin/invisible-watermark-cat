@@ -2,8 +2,6 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import os
 import seaborn as sns
-import matplotlib.cm as cm
-import matplotlib.colors as mcolors
 
 
 def plot_lpips_vs_threshold(df, attack_name, method, image_name, output_dir):
@@ -445,5 +443,3 @@ if __name__ == "__main__":
 
     # Step 3: Plot per-attack average across all images
     plot_avg_first_failure_lpips(df_summary, save_path="decode_lpips_results/avg_first_failure_lpips.png")
-
-
