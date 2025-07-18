@@ -6,6 +6,31 @@ import numpy as np
 BASE_DIR = "decode_lpips_results"
 METHODS = ["dwtDct", "dwtDctSvd", "rivaGan"]
 
+# Normalization Ranges for Resized Images
+threshold_ranges_resized = {
+    "crop": {"min_val": 0.4, "max_val": 1.0},
+    "decrease_brightness": {"min_val": 0.0, "max_val": 1.0},
+    "increase_brightness": {"min_val": 1.0, "max_val": 3.0},
+    "jpeg": {"min_val": 10, "max_val": 100},
+    "mask": {"min_val": 0, "max_val": 100},
+    "noise": {"min_val": 0, "max_val": 50},
+    "overlay": {"min_val": 0.0, "max_val": 1.0},
+    "resize": {"min_val": 0.10, "max_val": 1.00},
+    "rotate": {"min_val": 0, "max_val": 20}
+}
+reverse_attacks = {"crop", "jpeg", "decrease_brightness", "resize"}
+
+def normalize_threshold(attack, threshold):
+    if attack not in threshold_ranges_resized:
+        return None
+    min_val = threshold_ranges_resized[attack]["min_val"]
+    max_val = threshold_ranges_resized[attack]["max_val"]
+    severity = (threshold - min_val) / (max_val - min_val)
+    severity = max(0.0, min(severity, 1.0))
+    if attack in reverse_attacks:
+        severity = 1.0 - severity
+    return severity
+
 summary_data = []
 
 # Find all attack folders
@@ -19,6 +44,7 @@ for attack_dir in attack_dirs:
             continue
 
         thresholds = []
+        normalized_thresholds = []
         lpips_scores = []
         total_images = 0
         clean_decodable_images = 0
@@ -46,8 +72,9 @@ for attack_dir in attack_dirs:
                 if pd.notna(threshold) and pd.notna(lpips):
                     thresholds.append(float(threshold))
                     lpips_scores.append(float(lpips))
-                    # debug check
-                    # print(file_path, "  threshold:", threshold, "lpips:", lpips)
+                    normalized = normalize_threshold(attack_name, float(threshold))
+                    if normalized is not None:
+                        normalized_thresholds.append(normalized)
 
         # Add stats if any valid clean-decodable images
         if thresholds and lpips_scores:
@@ -56,6 +83,8 @@ for attack_dir in attack_dirs:
                 "Method": method,
                 "Avg Threshold": round(np.mean(thresholds), 3),
                 "Std Threshold": round(np.std(thresholds), 3),
+                "Avg Norm Threshold": round(np.mean(normalized_thresholds), 3) if normalized_thresholds else "--",
+                "Std Norm Threshold": round(np.std(normalized_thresholds), 3) if normalized_thresholds else "--",
                 "Avg LPIPS": round(np.mean(lpips_scores), 3),
                 "Std LPIPS": round(np.std(lpips_scores), 3)
             })
@@ -66,6 +95,8 @@ for attack_dir in attack_dirs:
                 "Method": method,
                 "Avg Threshold": "--",
                 "Std Threshold": "--",
+                "Avg Norm Threshold": "--",
+                "Std Norm Threshold": "--",
                 "Avg LPIPS": "--",
                 "Std LPIPS": "--"
             })
@@ -89,8 +120,8 @@ summary_df["Method"] = summary_df["Method"].map(method_map)
 latex_lines = [
     "\\begin{table}[ht]",
     "\\centering",
-    "\\caption{Average Thresholds and LPIPS Scores (± std) at First Decode Failure}",
-    "\\label{tab:avg_threshold_lpips}",
+    "\\caption{Average Semantic Thresholds and LPIPS Scores (± std) at First Decode Failure}",
+    "\\label{tab:avg_normalized_threshold_lpips}",
     "\\renewcommand{\\arraystretch}{1.2}",
     "\\begin{tabular}{|l|c|c|c|}",
     "\\hline",
@@ -106,11 +137,11 @@ for attack in summary_df["Attack"].unique():
         subdf = summary_df[(summary_df["Attack"] == attack) & (summary_df["Method"] == method)]
         if not subdf.empty:
             r = subdf.iloc[0]
-            if r["Avg Threshold"] == "--":
+            if r["Avg Norm Threshold"] == "--":
                 row_thresh.append("--")
                 row_lpips.append("--")
             else:
-                row_thresh.append(f"Threshold: {r['Avg Threshold']} $\\pm$ {r['Std Threshold']}")
+                row_thresh.append(f"Threshold: {r['Avg Norm Threshold']} $\\pm$ {r['Std Norm Threshold']}")
                 row_lpips.append(f"LPIPS: {r['Avg LPIPS']} $\\pm$ {r['Std LPIPS']}")
         else:
             row_thresh.append("--")

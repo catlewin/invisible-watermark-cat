@@ -1,37 +1,37 @@
 \begin{table}[ht]
 \centering
-\caption{Average Thresholds and LPIPS Scores (± std) at First Decode Failure}
-\label{tab:avg_threshold_lpips}
+\caption{Average Semantic Thresholds and LPIPS Scores (± std) at First Decode Failure}
+\label{tab:avg_normalized_threshold_lpips}
 \renewcommand{\arraystretch}{1.2}
 \begin{tabular}{|l|c|c|c|}
 \hline
 \textbf{Attack Type} & \textbf{DWT-DCT} & \textbf{DWT-DCT-SVD} & \textbf{RivaGAN} \\
 \hline
-crop & Threshold: 0.9 $\pm$ 0.0 & Threshold: 0.9 $\pm$ 0.0 & Threshold: 0.729 $\pm$ 0.103 \\
+crop & Threshold: 0.167 $\pm$ 0.0 & Threshold: 0.167 $\pm$ 0.0 & Threshold: 0.452 $\pm$ 0.172 \\
  & LPIPS: 0.164 $\pm$ 0.031 & LPIPS: 0.174 $\pm$ 0.039 & LPIPS: 0.373 $\pm$ 0.135 \\
 \hline
-decrease_brightness & Threshold: 0.7 $\pm$ 0.1 & Threshold: 0.787 $\pm$ 0.05 & Threshold: 0.386 $\pm$ 0.16 \\
+decrease_brightness & Threshold: 0.3 $\pm$ 0.1 & Threshold: 0.213 $\pm$ 0.05 & Threshold: 0.614 $\pm$ 0.16 \\
  & LPIPS: 0.066 $\pm$ 0.023 & LPIPS: 0.033 $\pm$ 0.022 & LPIPS: 0.249 $\pm$ 0.124 \\
 \hline
-increase_brightness & Threshold: 1.2 $\pm$ 0.0 & Threshold: 1.24 $\pm$ 0.08 & Threshold: 1.9 $\pm$ 0.539 \\
+increase_brightness & Threshold: 0.1 $\pm$ 0.0 & Threshold: 0.12 $\pm$ 0.04 & Threshold: 0.45 $\pm$ 0.269 \\
  & LPIPS: 0.028 $\pm$ 0.012 & LPIPS: 0.038 $\pm$ 0.025 & LPIPS: 0.23 $\pm$ 0.135 \\
 \hline
-jpeg & Threshold: 100.0 $\pm$ 0.0 & Threshold: 65.333 $\pm$ 18.571 & Threshold: 51.429 $\pm$ 19.588 \\
+jpeg & Threshold: 0.0 $\pm$ 0.0 & Threshold: 0.385 $\pm$ 0.206 & Threshold: 0.54 $\pm$ 0.218 \\
  & LPIPS: 0.001 $\pm$ 0.0 & LPIPS: 0.008 $\pm$ 0.007 & LPIPS: 0.013 $\pm$ 0.009 \\
 \hline
-mask & Threshold: 0.25 $\pm$ 0.087 & Threshold: 0.297 $\pm$ 0.012 & Threshold: 0.657 $\pm$ 0.234 \\
+mask & Threshold: 0.002 $\pm$ 0.001 & Threshold: 0.003 $\pm$ 0.0 & Threshold: 0.007 $\pm$ 0.002 \\
  & LPIPS: 0.324 $\pm$ 0.105 & LPIPS: 0.383 $\pm$ 0.067 & LPIPS: 0.7 $\pm$ 0.215 \\
 \hline
-noise & Threshold: 7.5 $\pm$ 4.33 & Threshold: 17.667 $\pm$ 3.091 & Threshold: 24.286 $\pm$ 7.986 \\
+noise & Threshold: 0.15 $\pm$ 0.087 & Threshold: 0.353 $\pm$ 0.062 & Threshold: 0.486 $\pm$ 0.16 \\
  & LPIPS: 0.021 $\pm$ 0.021 & LPIPS: 0.107 $\pm$ 0.073 & LPIPS: 0.152 $\pm$ 0.077 \\
 \hline
 overlay & Threshold: 0.25 $\pm$ 0.15 & Threshold: 0.14 $\pm$ 0.08 & Threshold: 0.529 $\pm$ 0.144 \\
  & LPIPS: 0.177 $\pm$ 0.146 & LPIPS: 0.071 $\pm$ 0.059 & LPIPS: 0.355 $\pm$ 0.159 \\
 \hline
-resize & Threshold: 0.92 $\pm$ 0.04 & Threshold: 0.28 $\pm$ 0.122 & Threshold: 0.157 $\pm$ 0.082 \\
+resize & Threshold: 0.089 $\pm$ 0.044 & Threshold: 0.8 $\pm$ 0.136 & Threshold: 0.937 $\pm$ 0.091 \\
  & LPIPS: 0.007 $\pm$ 0.005 & LPIPS: 0.176 $\pm$ 0.128 & LPIPS: 0.338 $\pm$ 0.153 \\
 \hline
-rotate & Threshold: 2.0 $\pm$ 0.0 & Threshold: 2.0 $\pm$ 0.0 & Threshold: 13.286 $\pm$ 4.25 \\
+rotate & Threshold: 0.1 $\pm$ 0.0 & Threshold: 0.1 $\pm$ 0.0 & Threshold: 0.664 $\pm$ 0.212 \\
  & LPIPS: 0.056 $\pm$ 0.019 & LPIPS: 0.064 $\pm$ 0.021 & LPIPS: 0.318 $\pm$ 0.093 \\
 \hline
 \end{tabular}
