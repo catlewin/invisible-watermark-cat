@@ -1,0 +1,20 @@
+| Attack | Method | Threshold Δ | LPIPS at Failure Δ |
+|--------|--------|--------------|---------------------|
+| crop | dwtDct | 0.0 ± 0.0 | 0.001 ± 0.005 |
+| crop | dwtDctSvd | 0.0 ± 0.0 | -0.0 ± -0.001 |
+| decrease_brightness | dwtDct | -0.069 ± -0.028 | 0.019 ± 0.006 |
+| decrease_brightness | dwtDctSvd | -0.093 ± 0.05 | 0.033 ± 0.026 |
+| increase_brightness | dwtDct | 0.292 ± 0.186 | 0.078 ± 0.051 |
+| increase_brightness | dwtDctSvd | 0.173 ± 0.091 | 0.042 ± 0.009 |
+| jpeg | dwtDct | -6.923 ± 4.615 | -0.0 ± -0.0 |
+| jpeg | dwtDctSvd | 8.0 ± -7.218 | -0.007 ± -0.006 |
+| mask | dwtDct | 0.25 ± -0.047 | 0.297 ± -0.017 |
+| mask | dwtDctSvd | 0.27 ± 0.035 | 0.294 ± 0.027 |
+| noise | dwtDct | 6.346 ± 0.535 | -0.019 ± -0.02 |
+| noise | dwtDctSvd | 10.333 ± 1.306 | -0.1 ± -0.069 |
+| overlay | dwtDct | 0.112 ± -0.076 | 0.046 ± -0.067 |
+| overlay | dwtDctSvd | 0.08 ± 0.058 | 0.047 ± 0.04 |
+| resize | dwtDct | -0.338 ± 0.227 | -0.008 ± -0.004 |
+| resize | dwtDctSvd | 0.02 ± 0.028 | -0.175 ± -0.127 |
+| rotate | dwtDct | 0.0 ± 0.0 | 0.011 ± 0.007 |
+| rotate | dwtDctSvd | 0.0 ± 0.0 | 0.004 ± 0.003 |

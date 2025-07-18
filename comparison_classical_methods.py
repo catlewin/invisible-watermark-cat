@@ -14,7 +14,6 @@ original_dir = "decode_lpips_results_original"
 summary = []
 
 def parse_stats(folder):
-    clean_count = 0
     thresholds = []
     lpips_scores = []
 
@@ -26,7 +25,6 @@ def parse_stats(folder):
         clean = df[df["attack_type"] == "clean"]
 
         if not clean.empty and clean["can_decode_clean"].iloc[0] == True:
-            clean_count += 1
             failure = df[df["first_failure"].notna()].head(1)
             if not failure.empty:
                 thresholds.append(failure["first_failure"].values[0])
@@ -34,13 +32,13 @@ def parse_stats(folder):
                 if pd.notna(lpips):
                     lpips_scores.append(lpips)
 
-    return clean_count, thresholds, lpips_scores
+    return thresholds, lpips_scores
 
-def fmt_stats(values):
-    if values:
-        avg = round(np.mean(values), 3)
-        std = round(np.std(values), 3)
-        return f"{avg} ± {std}"
+def delta_stats(orig_values, resized_values):
+    if orig_values and resized_values:
+        delta_avg = round(np.mean(orig_values) - np.mean(resized_values), 3)
+        delta_std = round(np.std(orig_values) - np.std(resized_values), 3)
+        return f"{delta_avg} ± {delta_std}"
     else:
         return "--"
 
@@ -52,15 +50,14 @@ for attack in attacks:
         if not os.path.isdir(resized_path) or not os.path.isdir(original_path):
             continue
 
-        r_clean, r_thresh, r_lpips = parse_stats(resized_path)
-        o_clean, o_thresh, o_lpips = parse_stats(original_path)
+        r_thresh, r_lpips = parse_stats(resized_path)
+        o_thresh, o_lpips = parse_stats(original_path)
 
         summary.append({
             "Attack": attack,
             "Method": method,
-            "Clean Decode (Resized → Original)": f"{r_clean} → {o_clean}",
-            "Threshold (Resized → Original)": f"{fmt_stats(r_thresh)} → {fmt_stats(o_thresh)}",
-            "LPIPS at Failure (Resized → Original)": f"{fmt_stats(r_lpips)} → {fmt_stats(o_lpips)}"
+            "Threshold Δ": delta_stats(o_thresh, r_thresh),
+            "LPIPS at Failure Δ": delta_stats(o_lpips, r_lpips)
         })
 
 # Create DataFrame
@@ -68,31 +65,29 @@ df = pd.DataFrame(summary)
 df = df.sort_values(by=["Attack", "Method"])
 
 # Save Markdown
-md_path = "original_vs_resized_comparison_detailed.md"
+md_path = "original_vs_resized_delta.md"
 with open(md_path, "w") as f:
-    f.write("| Attack | Method | Clean Decode (Resized → Original) | Threshold (Resized → Original) | LPIPS at Failure (Resized → Original) |\n")
-    f.write("|--------|--------|----------------|--------------|---------------------|\n")
+    f.write("| Attack | Method | Threshold Δ | LPIPS at Failure Δ |\n")
+    f.write("|--------|--------|--------------|---------------------|\n")
     for _, row in df.iterrows():
         f.write(
-            f"| {row['Attack']} | {row['Method']} | {row['Clean Decode (Resized → Original)']} | "
-            f"{row['Threshold (Resized → Original)']} | {row['LPIPS at Failure (Resized → Original)']} |\n"
+            f"| {row['Attack']} | {row['Method']} | {row['Threshold Δ']} | {row['LPIPS at Failure Δ']} |\n"
         )
 
 # Save to LaTeX
-latex_path = "original_vs_resized_comparison_detailed.tex"
-with open("original_vs_resized_comparison_latex.tex", "w") as f:
+latex_path = "original_vs_resized_delta.tex"
+with open(latex_path, "w") as f:
     f.write("\\begin{table}[h!]\n\\centering\n")
-    f.write("\\begin{tabular}{llccc}\n\\toprule\n")
-    f.write("Attack & Method & Clean Decode & Threshold & LPIPS at Failure \\\\\n")
+    f.write("\\begin{tabular}{llcc}\n\\toprule\n")
+    f.write("Attack & Method & Threshold $\\Delta$ & LPIPS at Failure $\\Delta$ \\\\\n")
     f.write("\\midrule\n")
     for _, row in df.iterrows():
-        attack = row["Attack"].replace("_", "\\_")  # escape LaTeX underscores
+        attack = row["Attack"].replace("_", " ")  # escape LaTeX underscores
         f.write(
-            f"{attack} & {row['Method']} & {row['Clean Decode (Resized → Original)']} & "
-            f"{row['Threshold (Resized → Original)']} & {row['LPIPS at Failure (Resized → Original)']} \\\\\n"
+            f"{attack} & {row['Method']} & {row['Threshold Δ']} & {row['LPIPS at Failure Δ']} \\\\\n"
         )
     f.write("\\bottomrule\n\\end{tabular}\n")
-    f.write("\\caption{Comparison of clean decode counts, average thresholds, and LPIPS at first failure between resized and original images.}\n")
-    f.write("\\label{tab:original_vs_resized}\n\\end{table}\n")
+    f.write("\\caption{Delta in average thresholds and LPIPS at first failure between original and resized images.}\n")
+    f.write("\\label{tab:original_vs_resized_delta}\n\\end{table}\n")
 
-print("📄 LaTeX table saved as original_vs_resized_comparison_latex.tex")
+print("✅ Markdown and LaTeX delta tables saved.")

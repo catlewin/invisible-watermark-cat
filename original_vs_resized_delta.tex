@@ -1,0 +1,29 @@
+\begin{table*}[t]
+\centering
+\begin{tabular}{llcc}
+\toprule
+\textbf{Attack} & \textbf{Method} & \textbf{$\Delta$ in Threshold} & \textbf{$\Delta$ in LPIPS at Failure} \\
+\midrule
+\textbf{crop} & dwtDct & 0.0 ± 0.0 & 0.001 ± 0.005 \\
+ & dwtDctSvd & 0.0 ± 0.0 & -0.0 ± -0.001 \\
+\textbf{decrease brightness} & dwtDct & -0.069 ± -0.028 & 0.019 ± 0.006 \\
+ & dwtDctSvd & -0.093 ± 0.05 & 0.033 ± 0.026 \\
+\textbf{increase brightness} & dwtDct & 0.292 ± 0.186 & 0.078 ± 0.051 \\
+ & dwtDctSvd & 0.173 ± 0.091 & 0.042 ± 0.009 \\
+\textbf{jpeg} & dwtDct & -6.923 ± 4.615 & -0.0 ± -0.0 \\
+ & dwtDctSvd & 8.0 ± -7.218 & -0.007 ± -0.006 \\
+\textbf{mask} & dwtDct & 0.25 ± -0.047 & 0.297 ± -0.017 \\
+ & dwtDctSvd & 0.27 ± 0.035 & 0.294 ± 0.027 \\
+\textbf{noise} & dwtDct & 6.346 ± 0.535 & -0.019 ± -0.02 \\
+ & dwtDctSvd & 10.333 ± 1.306 & -0.1 ± -0.069 \\
+\textbf{overlay} & dwtDct & 0.112 ± -0.076 & 0.046 ± -0.067 \\
+ & dwtDctSvd & 0.08 ± 0.058 & 0.047 ± 0.04 \\
+\textbf{resize} & dwtDct & -0.338 ± 0.227 & -0.008 ± -0.004 \\
+ & dwtDctSvd & 0.02 ± 0.028 & -0.175 ± -0.127 \\
+\textbf{rotate} & dwtDct & 0.0 ± 0.0 & 0.011 ± 0.007 \\
+ & dwtDctSvd & 0.0 ± 0.0 & 0.004 ± 0.003 \\
+\bottomrule
+\end{tabular}
+\caption{Change in average thresholds and LPIPS at first failure between original and resized images.}
+\label{tab:original_vs_resized_delta}
+\end{table*}
