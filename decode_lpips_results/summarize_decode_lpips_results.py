@@ -12,7 +12,7 @@ threshold_ranges_resized = {
     "decrease_brightness": {"min_val": 0.0, "max_val": 1.0},
     "increase_brightness": {"min_val": 1.0, "max_val": 3.0},
     "jpeg": {"min_val": 10, "max_val": 100},
-    "mask": {"min_val": 0, "max_val": 100},
+    "mask": {"min_val": 0.00, "max_val": 1.00},
     "noise": {"min_val": 0, "max_val": 50},
     "overlay": {"min_val": 0.0, "max_val": 1.0},
     "resize": {"min_val": 0.10, "max_val": 1.00},
