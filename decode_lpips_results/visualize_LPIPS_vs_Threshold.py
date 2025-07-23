@@ -368,8 +368,9 @@ def extract_first_failure_lpips_from_csv(base_dir="decode_lpips_results"):
                 })
                 break  # first failure only
 
-    for record in records:
-        print(record)
+    # debugging
+    # for record in records:
+    #    print(record)
 
     return pd.DataFrame(records)
 
@@ -407,9 +408,73 @@ def plot_first_failure_lpips_by_image_per_method(df_summary, save_dir="first_fai
         print(f"✅ Saved: {save_path}")
 
 
-def plot_avg_first_failure_lpips(df_summary, save_path=None):
+def plot_avg_first_failure_lpips(df_summary, save_path=None, base_dir="decode_lpips_results"):
+    import numpy as np
+
+    # Start from existing grouped data
     avg_df = df_summary.groupby(["attack", "method"])["lpips_score"].mean().reset_index()
 
+    # 💡 Add static attacks (denoising, upscale) manually
+    static_attacks = ["denoising", "upscale"]
+    records = []
+
+    for attack in static_attacks:
+        attack_dir = os.path.join(base_dir, f"{attack}_test_results", "512x512")
+        if not os.path.isdir(attack_dir):
+            print(f"⚠️ Missing folder for {attack}, skipping.")
+            continue
+
+        for method in os.listdir(attack_dir):
+            method_path = os.path.join(attack_dir, method)
+            if not os.path.isdir(method_path):
+                continue
+
+            lpips_scores = []
+
+            for file in os.listdir(method_path):
+                if not file.endswith("_merged_results.csv"):
+                    continue
+
+                df = pd.read_csv(os.path.join(method_path, file))
+
+                # Ensure 'attack' column exists (fallback to 'attack_type')
+                if "attack" not in df.columns and "attack_type" in df.columns:
+                    df = df.rename(columns={"attack_type": "attack"})
+
+                # Skip if we still don't have an 'attack' column
+                if "attack" not in df.columns:
+                    print(f"⚠️ Skipping {file} — no 'attack' column.")
+                    continue
+
+                # Make sure clean image decoded
+                if not df[df["attack"] == "clean"]["success"].any():
+                    continue
+
+                df = df[df["attack"] == attack]
+
+                df = df.sort_values("lpips_score")
+
+                for _, row in df.iterrows():
+                    if not row["success"]:
+                        lpips_scores.append(row["lpips_score"])
+                        break
+
+            if lpips_scores:
+                avg_score = np.mean(lpips_scores)
+                records.append({
+                    "attack": attack,
+                    "method": method,
+                    "lpips_score": avg_score
+                })
+            else:
+                print(f"⚠️ No failures found for {attack} - {method}")
+
+    # Append to avg_df
+    if records:
+        static_df = pd.DataFrame(records)
+        avg_df = pd.concat([avg_df, static_df], ignore_index=True)
+
+    # 📊 Plot
     plt.figure(figsize=(10, 6))
     sns.barplot(
         data=avg_df,
@@ -418,7 +483,8 @@ def plot_avg_first_failure_lpips(df_summary, save_path=None):
     plt.title("Average LPIPS Score at First Decode Failure (Per Attack)")
     plt.ylabel("Average LPIPS Score at First Failure")
     plt.xlabel("Attack Type")
-    plt.ylim(0, 1.1)
+    lpips_max = avg_df["lpips_score"].max()
+    plt.ylim(0, lpips_max + 0.05)
     plt.xticks(rotation=45)
     plt.tight_layout()
 
@@ -431,10 +497,15 @@ def plot_avg_first_failure_lpips(df_summary, save_path=None):
 
 
 
+
 if __name__ == "__main__":
     #plot_avg_lpips_by_threshold("decode_lpips_results")
     #plot_lpips_vs_severity_with_decode_markers(method="dwtDctSvd")
 
+    df_summary = extract_first_failure_lpips_from_csv()
+    plot_avg_first_failure_lpips(df_summary, save_path="LPIPS_Threshold_Graphs/ALL_ATTACK_avg_first_failure_lpips.png")
+
+    '''
     # Step 1: Extract the summary from the CSVs
     df_summary = extract_first_failure_lpips_from_csv()
 
@@ -443,3 +514,4 @@ if __name__ == "__main__":
 
     # Step 3: Plot per-attack average across all images
     plot_avg_first_failure_lpips(df_summary, save_path="decode_lpips_results/avg_first_failure_lpips.png")
+'''
