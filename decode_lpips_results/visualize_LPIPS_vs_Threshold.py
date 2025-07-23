@@ -503,7 +503,7 @@ if __name__ == "__main__":
     #plot_lpips_vs_severity_with_decode_markers(method="dwtDctSvd")
 
     df_summary = extract_first_failure_lpips_from_csv()
-    plot_avg_first_failure_lpips(df_summary, save_path="LPIPS_Threshold_Graphs/ALL_ATTACK_avg_first_failure_lpips.png")
+    plot_avg_first_failure_lpips(df_summary, "LPIPS_Threshold_Graphs/avg_first_failure_lpips.png")
 
     '''
     # Step 1: Extract the summary from the CSVs
