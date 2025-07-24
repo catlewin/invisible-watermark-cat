@@ -4,6 +4,16 @@ import matplotlib.pyplot as plt
 import numpy as np
 from collections import defaultdict
 
+plt.rcParams.update({
+    'axes.titlesize': 16,
+    'axes.labelsize': 14,
+    'xtick.labelsize': 12,
+    'ytick.labelsize': 12,
+    'legend.fontsize': 12,
+    'legend.title_fontsize': 13,
+    'figure.titlesize': 18
+})
+
 # Configurable constants
 methods = ['dwtDct', 'dwtDctSvd', 'rivaGan']
 attacks = [ 'mask', 'overlay', 'resize']
@@ -97,9 +107,9 @@ for method in methods:
         plt.bar(x + i * bar_width, values, width=bar_width, label=attack, color=attack_colors_dict[attack])
 
     # Finalize plot
-    plt.title(f"First Decode Failures by LPIPS Bin – {method}")
+    plt.title(f"First Decode Failures by LPIPS Bin (↓ LPIPS = More Similar) – {method}")
     plt.xlabel("LPIPS Score Bins")
-    plt.ylabel("Percent of First Decode Failures")
+    plt.ylabel("% of First Decode Failures")
     # Find the max percent value across all bars
     max_percent = max(
         100 * bin_attack_counts[bin_label][attack] / sum(
@@ -113,7 +123,6 @@ for method in methods:
 
     # Add a small margin (e.g., 5%)
     plt.ylim(0, min(100, max_percent + 5))
-
     group_center = x + (len(attacks) * bar_width) / 2 - bar_width / 2
     plt.xticks(group_center, bin_labels, rotation=45)
     plt.legend(title="Attack Type", loc='upper right', frameon=True)
