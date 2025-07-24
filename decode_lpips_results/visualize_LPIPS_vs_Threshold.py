@@ -538,7 +538,7 @@ def plot_avg_first_failure_lpips(df_summary, save_path=None, base_dir="decode_lp
 
 if __name__ == "__main__":
     #plot_avg_lpips_by_threshold("decode_lpips_results")
-    plot_lpips_vs_severity_with_decode_markers(method="dwtDctSvd")
+    plot_lpips_vs_severity_with_decode_markers(method="dwtDct")
 
     '''
     df_summary = extract_first_failure_lpips_from_csv()
