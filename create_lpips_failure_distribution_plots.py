@@ -14,9 +14,19 @@ plt.rcParams.update({
     'figure.titlesize': 20
 })
 
+attack_colors_dict = {
+    "denoising": "#1f77b4",     # blue
+    "jpeg": "#ff7f0e",          # orange
+    "upscale": "#d62728",       # red
+    "mask": "#9467bd",          # purple
+    "overlay": "#bcbd22",       # yellow-green
+    "resize": "#e377c2",        # pink
+}
+
+
 # Configurable constants
 methods = ['dwtDct', 'dwtDctSvd', 'rivaGan']
-attacks = [ 'denoising', 'jpeg', 'upscale']
+attacks = [ 'mask', 'overlay', 'resize']
 image_names = [
     "cat", "city_day", "city_night", "desert", "dog", "fish", "food",
     "forest", "man1", "man2", "man3", "mountain", "pages", "woman1", "woman2"
@@ -82,10 +92,6 @@ for method in methods:
                 bin_attack_counts[bin_label][attack] += 1
                 break
 
-    # Color map for attacks
-    attack_colors = plt.get_cmap('tab10')
-    attack_colors_dict = {attack: attack_colors(i % 10) for i, attack in enumerate(attacks)}
-
     # Prepare grouped bar plot
     spacing_scale = 0.4  # try between 0.5–0.8 for tighter spacing
     x = np.arange(len(bin_labels)) * spacing_scale
@@ -127,5 +133,5 @@ for method in methods:
     plt.xticks(group_center, bin_labels, rotation=45)
     plt.legend(title="Attack Type", loc='upper right', frameon=True)
     plt.tight_layout()
-    plt.savefig(f"lpips_failure_distribution_plots/low_lpips/{method}_lpips_failure_distribution.png")
+    plt.savefig(f"lpips_failure_distribution_plots/high_lpips/{method}_lpips_failure_distribution.png")
     plt.close()
