@@ -26,16 +26,16 @@ attack_colors_dict = {
 
 # Configurable constants
 methods = ['dwtDct', 'dwtDctSvd', 'rivaGan']
-attacks = [ 'mask', 'overlay', 'resize']
+attacks = [ 'mask', 'overlay', 'resize', 'denoising', 'jpeg', 'upscale' ]
 image_names = [
     "cat", "city_day", "city_night", "desert", "dog", "fish", "food",
     "forest", "man1", "man2", "man3", "mountain", "pages", "woman1", "woman2"
 ]
 base_dir = "decode_lpips_results"
-bin_width = 0.05
+bin_width = 0.1
 
 # Create output directory
-os.makedirs("lpips_failure_distribution_plots/high_lpips", exist_ok=True)
+os.makedirs("lpips_failure_distribution_plots/mixed_lpips", exist_ok=True)
 
 for method in methods:
     # Store all first-failure lpips scores and attack types for this method
@@ -76,14 +76,14 @@ for method in methods:
     max_lpips_score = max(method_lpips_scores)
     max_bin_edge = bin_width * (int(np.ceil(max_lpips_score / bin_width)) + 1)
     lpips_bins = np.arange(0.0, max_bin_edge, bin_width)
-    bin_labels = [f"{lpips_bins[i]:.2f}-{lpips_bins[i + 1]:.2f}" for i in range(len(lpips_bins) - 1)]
+    bin_labels = [f"{lpips_bins[i]:.1f}-{lpips_bins[i + 1]:.1f}" for i in range(len(lpips_bins) - 1)]
     bin_attack_counts = {label: defaultdict(int) for label in bin_labels}
 
     # Bin first failure LPIPS scores
     for lpips, attack in zip(method_lpips_scores, method_attack_labels):
         for i in range(len(lpips_bins) - 1):
             if lpips_bins[i] <= lpips < lpips_bins[i + 1]:
-                bin_label = f"{lpips_bins[i]:.2f}-{lpips_bins[i + 1]:.2f}"
+                bin_label = f"{lpips_bins[i]:.1f}-{lpips_bins[i + 1]:.1f}"
                 if bin_label not in bin_attack_counts:
                     print(f"❌ Unexpected bin label: {bin_label}")
                     print(f"  lpips={lpips}, bin_edges={lpips_bins}")
@@ -133,5 +133,5 @@ for method in methods:
     plt.xticks(group_center, bin_labels, rotation=45)
     plt.legend(title="Attack Type", loc='upper right', frameon=True)
     plt.tight_layout()
-    plt.savefig(f"lpips_failure_distribution_plots/high_lpips/{method}_lpips_failure_distribution.png")
+    plt.savefig(f"lpips_failure_distribution_plots/mixed_lpips/{method}_lpips_failure_distribution.png")
     plt.close()
