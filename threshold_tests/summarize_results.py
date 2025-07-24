@@ -128,11 +128,21 @@ def plot_combined_distribution(
         bin_centers: List[float],
         bin_width: float = 1.0
 ):
+    plt.rcParams.update({
+        'axes.titlesize': 21,
+        'axes.labelsize': 16,
+        'xtick.labelsize': 13,
+        'ytick.labelsize': 13,
+        'legend.fontsize': 15,
+        'legend.title_fontsize': 15,
+        'figure.titlesize': 21
+    })
+
     num_methods = len(thresholds_by_method)
     bar_width = bin_width / num_methods * 0.9
     method_names = list(thresholds_by_method.keys())
 
-    plt.figure(figsize=(12, 6))
+    plt.figure(figsize=(10, 6))
     max_count = 0  # for dynamic y-axis scaling
 
     for i, method in enumerate(method_names):
@@ -169,9 +179,9 @@ def plot_combined_distribution(
                     fontsize=8
                 )
 
-    plt.title(f"Combined {metric_label} Threshold Distribution", fontsize=13)
-    plt.xlabel(metric_label, fontsize=11)
-    plt.ylabel("Number of Images", fontsize=11)
+    plt.title(f"Combined {metric_label} Threshold Distribution")
+    plt.xlabel(metric_label)
+    plt.ylabel("Number of Images")
     plt.xticks(bin_centers, [str(x) for x in bin_centers], rotation=45)
     plt.ylim(0, max_count + 1)
     plt.legend()
@@ -773,15 +783,15 @@ if __name__ == "__main__":
         methods=["dwtDct", "dwtDctSvd", "rivaGan"],
         colors={"dwtDct": "skyblue", "dwtDctSvd": "lightgreen", "rivaGan": "salmon"}
     )
-    
+    '''
     summarize_mask_threshold(
-        results_root="threshold_tests/mask_test_results",
-        metric="mask_fraction",  # this should match the column name in your CSV
+        results_root="threshold_tests/512x512/mask_test_results",
+        metric="mask_fraction",
         metric_label="Mask Fraction",
         methods=["dwtDct", "dwtDctSvd", "rivaGan"],
         colors={"dwtDct": "skyblue","dwtDctSvd": "lightgreen","rivaGan": "salmon"}
     )
-
+    '''
     summarize_overlay_threshold(
         results_root="threshold_tests/overlay_test_results",
         metric="alpha",
@@ -813,7 +823,7 @@ if __name__ == "__main__":
 
     # Calls for original img threshold tests below
     # Only for dwtDct and dwtDctSvd methods -- large images use too much RAM for rivaGan
-    
+    '''
     summarize_noise_threshold(
         results_root="threshold_tests/original/noise_test_results",
         metric="std_dev",
@@ -887,7 +897,7 @@ if __name__ == "__main__":
         methods=["dwtDct", "dwtDctSvd"],
         colors={"dwtDct": "skyblue", "dwtDctSvd": "lightgreen"}
     )
-
+    '''
     # Summary for binary results
     '''
     summarize_upscale_results(

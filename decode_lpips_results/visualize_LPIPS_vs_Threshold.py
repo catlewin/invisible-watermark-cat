@@ -2,7 +2,17 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import os
 import seaborn as sns
+from matplotlib.pyplot import legend
 
+plt.rcParams.update({
+    'axes.titlesize': 18,
+    'axes.labelsize': 16,
+    'xtick.labelsize': 12,
+    'ytick.labelsize': 12,
+    'legend.fontsize': 14,
+    'legend.title_fontsize': 14,
+    'figure.titlesize': 20
+})
 
 def plot_lpips_vs_threshold(df, attack_name, method, image_name, output_dir):
     # Drop rows with missing threshold or lpips_score
@@ -230,6 +240,11 @@ def plot_lpips_vs_severity_with_decode_markers(base_dir="decode_lpips_results", 
     df_all = load_all_merged_data(base_dir)
     df_all = df_all[df_all["method"] == method]
 
+    label_map = {
+        "increase_brightness": "↑ brightness",
+        "decrease_brightness": "↓ brightness"
+    }
+
     # Ensure threshold column exists by mapping known variants
     threshold_column_candidates = ["threshold", "crop_ratio", "mask_fraction", "jpeg_quality", "brightness_factor",
                                    "noise_level", "overlay_opacity", "resize_factor", "rotate_degrees"]
@@ -287,14 +302,18 @@ def plot_lpips_vs_severity_with_decode_markers(base_dir="decode_lpips_results", 
             color = color_map[attack]
 
             # Plot full line (success + failure) with correct color
-            plt.plot(df_attack["semantic_severity"], df_attack["lpips_score"], "-", color=color)
+            display_label = label_map.get(attack, attack)
+            plt.plot(df_attack["semantic_severity"], df_attack["lpips_score"], "-", color=color, label=display_label)
 
             # Overlay markers for success/failure
             success = df_attack[df_attack["success"] == True]
             failure = df_attack[df_attack["success"] == False]
 
-            plt.plot(success["semantic_severity"], success["lpips_score"], "o", color=color, label=f"{attack} ✓")
-            plt.plot(failure["semantic_severity"], failure["lpips_score"], "x", color=color, label=f"{attack} ✗")
+            plt.plot(success["semantic_severity"], success["lpips_score"], "o", color=color)
+            plt.plot(failure["semantic_severity"], failure["lpips_score"], "x", color=color)
+
+        plt.plot([], [], 'o', color='gray', label='Success')
+        plt.plot([], [], 'x', color='gray', label='Failure')
 
         plt.title(f"LPIPS vs Semantic Severity with Decode Status — {image} ({method})")
         plt.xlabel("Semantic Severity (0 = weakest attack, 1 = strongest)")
@@ -481,11 +500,30 @@ def plot_avg_first_failure_lpips(df_summary, save_path=None, base_dir="decode_lp
         x="attack", y="lpips_score", hue="method", ci=None
     )
     plt.title("Average LPIPS Score at First Decode Failure (Per Attack)")
-    plt.ylabel("Average LPIPS Score at First Failure")
+    plt.ylabel("Avg LPIPS Score at First Failure")
     plt.xlabel("Attack Type")
     lpips_max = avg_df["lpips_score"].max()
     plt.ylim(0, lpips_max + 0.05)
-    plt.xticks(rotation=45)
+
+    # Custom short attack names for cleaner x-axis
+    short_attack_labels = {
+        "decrease_brightness": "↓ Brightness",
+        "increase_brightness": "↑ Brightness",
+        "jpeg": "JPEG",
+        "noise": "Noise",
+        "mask": "Mask",
+        "overlay": "Overlay",
+        "resize": "Resize",
+        "rotate": "Rotate",
+        "denoising": "Denoise",
+        "upscale": "Upscale"
+    }
+
+    # Apply new labels to x-ticks
+    current_labels = [tick.get_text() for tick in plt.gca().get_xticklabels()]
+    new_labels = [short_attack_labels.get(label, label) for label in current_labels]
+    plt.xticks(ticks=plt.gca().get_xticks(), labels=new_labels, rotation=45)
+
     plt.tight_layout()
 
     if save_path:
@@ -500,12 +538,14 @@ def plot_avg_first_failure_lpips(df_summary, save_path=None, base_dir="decode_lp
 
 if __name__ == "__main__":
     #plot_avg_lpips_by_threshold("decode_lpips_results")
-    #plot_lpips_vs_severity_with_decode_markers(method="dwtDctSvd")
-
-    df_summary = extract_first_failure_lpips_from_csv()
-    plot_avg_first_failure_lpips(df_summary, "LPIPS_Threshold_Graphs/avg_first_failure_lpips.png")
+    plot_lpips_vs_severity_with_decode_markers(method="dwtDctSvd")
 
     '''
+    df_summary = extract_first_failure_lpips_from_csv()
+    plot_avg_first_failure_lpips(df_summary, "LPIPS_Threshold_Graphs/avg_first_failure_lpips.png")
+    '''
+
+'''
     # Step 1: Extract the summary from the CSVs
     df_summary = extract_first_failure_lpips_from_csv()
 
