@@ -5,18 +5,18 @@ import numpy as np
 from collections import defaultdict
 
 plt.rcParams.update({
-    'axes.titlesize': 16,
-    'axes.labelsize': 14,
+    'axes.titlesize': 18,
+    'axes.labelsize': 16,
     'xtick.labelsize': 12,
     'ytick.labelsize': 12,
-    'legend.fontsize': 12,
-    'legend.title_fontsize': 13,
-    'figure.titlesize': 18
+    'legend.fontsize': 14,
+    'legend.title_fontsize': 14,
+    'figure.titlesize': 20
 })
 
 # Configurable constants
 methods = ['dwtDct', 'dwtDctSvd', 'rivaGan']
-attacks = [ 'mask', 'overlay', 'resize']
+attacks = [ 'denoising', 'jpeg', 'upscale']
 image_names = [
     "cat", "city_day", "city_night", "desert", "dog", "fish", "food",
     "forest", "man1", "man2", "man3", "mountain", "pages", "woman1", "woman2"
@@ -127,5 +127,5 @@ for method in methods:
     plt.xticks(group_center, bin_labels, rotation=45)
     plt.legend(title="Attack Type", loc='upper right', frameon=True)
     plt.tight_layout()
-    plt.savefig(f"lpips_failure_distribution_plots/high_lpips/{method}_lpips_failure_distribution.png")
+    plt.savefig(f"lpips_failure_distribution_plots/low_lpips/{method}_lpips_failure_distribution.png")
     plt.close()
